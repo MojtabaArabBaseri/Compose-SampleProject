@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="size_radius_button">8dp</dimen>
+    <dimen name="size_height_button">56dp</dimen>
+    <dimen name="max_height_editText">66dp</dimen>
+    <dimen name="size_radius_editText">10dp</dimen>
+
+</resources>

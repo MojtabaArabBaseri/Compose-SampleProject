@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="size_radius_editText">10dp</dimen>
+    <dimen name="space_logo_from_top">180dp</dimen>
+    <dimen name="space_box_username_from_logo">57dp</dimen>
+    <dimen name="size_height_button">56dp</dimen>
+    <dimen name="space_btn_regiter_from_lbl_family_sign_up">187dp</dimen>
+
+</resources>

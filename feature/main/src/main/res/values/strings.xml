@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_application">Millennium</string>
+    <string name="profile">Profile</string>
+    <string name="articles">Articles</string>
+    <string name="message_when_user_exit_application">Click Again To Exit The Application</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="attention">Attention</string>
+    <string name="message_change_language">Do you want to change language to Persian?</string>
+
+</resources>

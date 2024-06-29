@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_application">هزاره</string>
+    <string name="profile">حساب کاربری</string>
+    <string name="articles">مقالات</string>
+    <string name="message_when_user_exit_application">برای خروج از برنامه دوباره کلیک نمایید</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="attention">اخطار</string>
+    <string name="message_change_language">آیا می خواهید زبان را به انگلیسی تغییر دهید؟</string>
+
+
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="link_github">https://github.com/mojtabaarabbaseri</string>
+    <string name="link_gitlab">https://gitlab.com/mojtabaarabbaseri</string>
+    <string name="link_inkedin">https://www.linkedin.com/in/mojtaba-arabbaseri-003343b0</string>
+    <string name="link_telegram">https://t.me/MojtabaArabBaseri</string>
+    <string name="link_instagram">https://instagram.com/mojtaba.arab.baseri?igshid=ZGUzMzM3NWJiOQ==</string>
+    <string name="link_whatsapp">https://wa.me/qr/NR2XYU3L3SLQD1</string>
+
+    <string name="full_name">مجتبی عرب باصری</string>
+    <string name="github">گیت هاب</string>
+    <string name="gitlab">گیت لب</string>
+    <string name="linkedin">لینکدین</string>
+    <string name="telegram">تلگرام</string>
+    <string name="whatsapp">واتساپ</string>
+    <string name="instagram">اینستاگرام</string>
+    <string name="aboutMe">در مورد من</string>
+
+    <string name="profile">حساب کاربری</string>
+    <string name="detail_article">جزئیات مقاله</string>
+    <string name="articles">مقالات</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="attention">اخطار</string>
+    <string name="change_language">تغییر زبان</string>
+    <string name="message_change_language">آیا می خواهید زبان را به انگلیسی تغییر دهید؟</string>
+    <string name="about_me_detail">سلام\nمن مجتبی عرب باصری هستم.\nبرنامه نویس اندروید با بیش از 6 سال تخصص در ساخت اپلیکیشن های متنوع. مسلط به Java, Kotlin, Coroutines, Flow, Android SDK, MVVM Architecture, Hilt, Rest API, Room, Jetpack Compose, XML, Git و کتابخانه های اندروید برای ساخت رابط های کاربری پایدار.</string>
+
+
+</resources>
