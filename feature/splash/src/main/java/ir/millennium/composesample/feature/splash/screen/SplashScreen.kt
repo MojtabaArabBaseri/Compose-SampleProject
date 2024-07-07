@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -40,11 +41,13 @@ fun SplashScreen(
 
     var isVisibleLogo by rememberSaveable { mutableStateOf(false) }
 
+    val stateTheme = viewModel.typeTheme.collectAsState()
+
     Box(modifier = with(Modifier) {
         fillMaxSize()
             .navigationBarsPadding()
             .paint(
-                painterResource(id = if (viewModel.typeTheme.value == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_splash_light_theme),
+                painterResource(id = if (stateTheme.value == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_splash_light_theme),
                 contentScale = ContentScale.FillBounds
             )
     })
@@ -60,7 +63,13 @@ fun SplashScreen(
                 enter = fadeIn(tween(2500))
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.logo),
+                    painter = painterResource(
+                        id = if (stateTheme.value == TypeTheme.DARK.typeTheme) {
+                            R.drawable.ic_logo_complete_light
+                        } else {
+                            R.drawable.ic_logo_complete_dark
+                        }
+                    ),
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)

@@ -37,6 +37,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -110,6 +111,8 @@ fun LoginScreen(viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit) {
 
     var visibleAnimationEnterScreen by rememberSaveable { mutableStateOf(false) }
 
+    val stateTheme = viewModel.typeTheme.collectAsState()
+
     fun validateUserName(inputText: String) {
         isCorrectUserName = inputText.lowercase() != USER_NAME
     }
@@ -126,7 +129,7 @@ fun LoginScreen(viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit) {
                 .fillMaxSize()
                 .navigationBarsPadding()
                 .paint(
-                    painterResource(id = if (viewModel.typeTheme.value == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_login_light_theme),
+                    painterResource(id = if (stateTheme.value == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_login_light_theme),
                     contentScale = ContentScale.FillBounds
                 )
         ) {
@@ -260,7 +263,7 @@ fun LoginScreen(viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit) {
                         .animateEnterExit(enter = fadeIn(tween(1000, 1500))),
                     label = {
                         Text(
-                            text = stringResource(id = R.string.please_enter_password),
+                            text = stringResource(id = R.string.password),
                             style = MaterialTheme.typography.bodyMedium,
                             modifier = Modifier.background(Transparent)
                         )
