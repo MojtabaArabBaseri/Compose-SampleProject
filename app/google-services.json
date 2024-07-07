@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "206966106304",
+    "project_id": "composesample-20d23",
+    "storage_bucket": "composesample-20d23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206966106304:android:3aac53f0f7e65cb908e525",
+        "android_client_info": {
+          "package_name": "ir.millennium.composesample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDytuVNOyVgj0O8lj31vqTEYtj2RTQxW2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

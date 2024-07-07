@@ -38,6 +38,8 @@ class LibraryPlugin : Plugin<Project> {
                 // Paging
                 add("implementation", libs.findLibrary("androidx.paging.runtime.ktx").get())
                 add("implementation", libs.findLibrary("androidx.paging.compose").get())
+                //Firebase
+//                add("implementation", libs.findLibrary("com.google.firebase:firebase-analytics").get())
                 //Test
                 add("testImplementation", libs.findLibrary("junit").get())
                 add("androidTestImplementation", libs.findLibrary("androidx.junit").get())

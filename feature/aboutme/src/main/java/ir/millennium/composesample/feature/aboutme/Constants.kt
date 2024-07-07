@@ -24,7 +24,7 @@ object Constants {
             add(
                 UserProfileSocialNetworkEntity(
                     title = R.string.linkedin,
-                    link = R.string.link_inkedin
+                    link = R.string.link_linkedin
                 )
             )
             add(

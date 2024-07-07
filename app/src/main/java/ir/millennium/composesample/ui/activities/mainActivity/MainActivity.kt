@@ -1,4 +1,4 @@
-package ir.millennium.composesample.ui.activitys.mainActivity
+package ir.millennium.composesample.ui.activities.mainActivity
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -10,7 +10,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.Observer
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint

@@ -8,7 +8,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.kotlin
 
 class ApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -16,6 +15,7 @@ class ApplicationPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
+                apply("com.google.gms.google-services")
 
                 apply("io.millennium.gradle.android.application.compose")
                 apply("io.millennium.gradle.android.hilt")
@@ -35,7 +35,12 @@ class ApplicationPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.material3").get())
                 add("implementation", libs.findLibrary("material").get())
                 add("implementation", libs.findLibrary("accompanist.systemuicontroller").get())
+                add("implementation", libs.findLibrary("androidx.multidex").get())
                 add("implementation", libs.findLibrary("timber").get())
+                //Firebase
+                add("implementation", platform(libs.findLibrary("firebase.bom").get()))
+                add("implementation", libs.findLibrary("firebase.analytics").get())
+                add("implementation", libs.findLibrary("firebase.messaging.ktx").get())
                 //Test
                 add("testImplementation", libs.findLibrary("junit").get())
                 add("androidTestImplementation", libs.findLibrary("androidx.junit").get())

@@ -1,4 +1,4 @@
-package ir.millennium.composesample.ui.activitys.mainActivity
+package ir.millennium.composesample.ui.activities.mainActivity
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
