@@ -15,8 +15,8 @@ This Android project template is built using the following technologies:
 - Retrofit for networking
 - Gson for JSON parsing
 - Navigation Component
-- Safe Args
 - Data Store
+- Firebase Cloud Messaging (FCM)
 - Coil
 - Dark Theme
 - Multi Language
