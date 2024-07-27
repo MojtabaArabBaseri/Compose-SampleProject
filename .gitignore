@@ -8,13 +8,17 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
-/build
+/build/
 /captures
 .externalNativeBuild
 .cxx
 local.properties
 hs_err_pid*.log
 replay_pid*.log
+/app/build/
+/app/build/generated/
+/gradle/build-logic/convention/build/
+
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/androidstudio
