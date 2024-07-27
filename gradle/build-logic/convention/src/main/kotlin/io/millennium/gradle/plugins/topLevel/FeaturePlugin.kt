@@ -31,6 +31,11 @@ class FeaturePlugin : Plugin<Project> {
                 //Preview
                 add("implementation", libs.findLibrary("androidx.ui.tooling.preview").get())
                 add("implementation", libs.findLibrary("androidx.navigation.runtime.ktx").get())
+                //Firebase
+                add("implementation", platform(libs.findLibrary("firebase.bom").get()))
+                add("implementation", libs.findLibrary("firebase.analytics").get())
+                add("implementation", libs.findLibrary("firebase.crashlytics").get())
+                add("implementation", libs.findLibrary("firebase.crashlytics.ktx").get())
 
             }
         }

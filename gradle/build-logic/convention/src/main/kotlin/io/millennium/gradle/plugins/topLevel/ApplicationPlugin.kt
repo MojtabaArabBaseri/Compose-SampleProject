@@ -16,6 +16,7 @@ class ApplicationPlugin : Plugin<Project> {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
                 apply("com.google.gms.google-services")
+                apply("com.google.firebase.crashlytics")
 
                 apply("io.millennium.gradle.android.application.compose")
                 apply("io.millennium.gradle.android.hilt")
@@ -40,6 +41,8 @@ class ApplicationPlugin : Plugin<Project> {
                 //Firebase
                 add("implementation", platform(libs.findLibrary("firebase.bom").get()))
                 add("implementation", libs.findLibrary("firebase.analytics").get())
+                add("implementation", libs.findLibrary("firebase.crashlytics").get())
+                add("implementation", libs.findLibrary("firebase.crashlytics.ktx").get())
                 add("implementation", libs.findLibrary("firebase.messaging.ktx").get())
                 //Test
                 add("testImplementation", libs.findLibrary("junit").get())

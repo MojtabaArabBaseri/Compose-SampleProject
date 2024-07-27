@@ -23,7 +23,6 @@ import ir.millennium.composesample.core.network.dataSource.ArticleRemoteMediator
 import ir.millennium.composesample.core.network.di.qualifiers.ApiCaching
 import ir.millennium.composesample.core.network.di.qualifiers.OkHttpClientCaching
 import ir.millennium.composesample.core.network.di.qualifiers.OnlineInterceptor
-import ir.millennium.composesample.core.network.di.qualifiers.RemoteRepositoryCaching
 import ir.millennium.composesample.core.network.di.qualifiers.RetrofitCaching
 import ir.millennium.composesample.core.utils.utils.AuxiliaryFunctionsManager
 import okhttp3.Cache

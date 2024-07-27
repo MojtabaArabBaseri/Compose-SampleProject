@@ -5,9 +5,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import ir.millennium.composesample.core.database.AppDatabase
 import ir.millennium.composesample.core.database.model.ArticleEntity
 import ir.millennium.composesample.core.network.Constants
-import ir.millennium.composesample.core.database.AppDatabase
 import ir.millennium.composesample.core.network.mapper.mapToArticleEntity
 import retrofit2.HttpException
 import java.io.IOException

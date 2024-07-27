@@ -34,7 +34,7 @@ fun NavGraphBuilder.detailArticleScreen(
         exitTransition = { exitTransient() }) { backstackEntry ->
         val articleItemJson = backstackEntry.arguments?.getString("detail-article-Item")
         val articleItem = Gson().fromJson(articleItemJson, ArticleItem::class.java)
-        DetailArticleScreen(articleItem,onBackPressed)
+        DetailArticleScreen(articleItem, onBackPressed)
     }
 }
 

@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("io.millennium.gradle.android.application")
 }
@@ -15,10 +18,14 @@ android {
 
     signingConfigs {
         register("release") {
-            storeFile = file("D:/android-project/runnigApp/SampleProjectCompose/compose.jks")
-            storePassword = "123456789"
-            keyAlias = "key"
-            keyPassword = "123456789"
+            val properties = Properties()
+            properties.load(FileInputStream(project.rootProject.file("local.properties")))
+            if (properties.isNotEmpty()) {
+                storeFile = file(properties.getProperty("signing.path"))
+                storePassword = properties.getProperty("signing.storePassword")
+                keyAlias = properties.getProperty("signing.keyAlias")
+                keyPassword = properties.getProperty("signing.keyPassword")
+            }
         }
     }
 

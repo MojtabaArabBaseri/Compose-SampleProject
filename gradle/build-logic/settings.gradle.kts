@@ -4,8 +4,8 @@ dependencyResolutionManagement {
         mavenCentral()
         gradlePluginPortal()
         mavenLocal()
-        maven ( "https://jitpack.io" )
-        maven ("https://maven.google.com")
+        maven("https://jitpack.io")
+        maven("https://maven.google.com")
     }
 
     versionCatalogs {
