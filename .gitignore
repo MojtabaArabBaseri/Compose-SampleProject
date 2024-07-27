@@ -18,6 +18,8 @@ replay_pid*.log
 /app/build/
 /app/build/generated/
 /gradle/build-logic/convention/build/
+.kotlin/
+
 
 
 
