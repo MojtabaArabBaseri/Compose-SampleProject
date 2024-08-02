@@ -2,6 +2,7 @@
     <string name="app_name">Millennium, Compose</string>
     <string name="title_application">Millennium</string>
     <string name="description_application">Millennium Data Processing Group</string>
+    <string name="description_for_login">Please sign in using your Google account. By using Google sign-in, you\'ll have increased security and convenience.</string>
     <string name="username_incorrect">Username Incorrect</string>
     <string name="password_incorrect">Password Incorrect</string>
     <string name="user_name">Username: Mojtaba</string>
@@ -10,7 +11,7 @@
     <string name="please_enter_user_name">Please Enter User Name</string>
     <string name="please_enter_password">Please Enter Password</string>
     <string name="copyright">Developed by Mojtaba Arab Baseri</string>
-    <string name="login">Login</string>
+    <string name="login">Sign in with Google Account</string>
     <string name="message_when_user_exit_application">Click Again To Exit The Application</string>
     <string name="message_when_username_password_incorrect">User Name Or Password Incorrect</string>
 

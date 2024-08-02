@@ -44,6 +44,8 @@ class ApplicationPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("firebase.crashlytics").get())
                 add("implementation", libs.findLibrary("firebase.crashlytics.ktx").get())
                 add("implementation", libs.findLibrary("firebase.messaging.ktx").get())
+                add("implementation", libs.findLibrary("firebase.auth").get())
+                add("implementation", libs.findLibrary("play.services.auth").get())
                 //Test
                 add("testImplementation", libs.findLibrary("junit").get())
                 add("androidTestImplementation", libs.findLibrary("androidx.junit").get())

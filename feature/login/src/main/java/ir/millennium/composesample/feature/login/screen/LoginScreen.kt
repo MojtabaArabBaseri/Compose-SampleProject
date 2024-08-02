@@ -1,13 +1,16 @@
 package ir.millennium.composesample.feature.login.screen
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,16 +25,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -48,78 +46,69 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ir.millennium.composesample.core.designsystem.theme.GrayDark
-import ir.millennium.composesample.core.designsystem.theme.GrayMedium
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composesample.core.designsystem.theme.Green
-import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
+import ir.millennium.composesample.core.firebase.authentication.SignInResult
+import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.model.entity.TypeTheme
-import ir.millennium.composesample.feature.login.Constants.PASSWORD
-import ir.millennium.composesample.feature.login.Constants.USER_NAME
 import ir.millennium.composesample.feature.login.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+
 
 @OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun LoginScreen(viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit) {
-
-    val focusManager = LocalFocusManager.current
-
-    val context = LocalContext.current
-
-    val focusRequester = remember { FocusRequester() }
-
-    val keyboardController = LocalSoftwareKeyboardController.current
-
+fun LoginScreen(
+    viewModel: LoginScreenViewModel,
+    navToMainScreen: () -> Unit,
+    authState: AuthState
+) {
     val coroutineScope = rememberCoroutineScope()
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    var userNameValue by rememberSaveable { mutableStateOf("") }
-    var passwordValue by rememberSaveable { mutableStateOf("") }
     var isLoadingVisible by rememberSaveable { mutableStateOf(false) }
-    var statusEnabledCardLogin by rememberSaveable { mutableStateOf(true) }
-    var isCorrectUserName by rememberSaveable { mutableStateOf(false) }
-    var isCorrectPassword by rememberSaveable { mutableStateOf(false) }
 
     var visibleAnimationEnterScreen by rememberSaveable { mutableStateOf(false) }
 
-    val stateTheme = viewModel.typeTheme.collectAsState()
+    val stateTheme = viewModel.typeTheme.collectAsStateWithLifecycle()
 
-    fun validateUserName(inputText: String) {
-        isCorrectUserName = inputText.lowercase() != USER_NAME
-    }
-
-    fun validatePassword(inputText: String) {
-        isCorrectPassword = inputText != PASSWORD
-    }
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartIntentSenderForResult(),
+        onResult = { result ->
+            isLoadingVisible = false
+            if (result.resultCode == RESULT_OK) {
+                coroutineScope.launch {
+                    val signInResult = viewModel.googleAuthUiClient.signInWithIntent(
+                        intent = result.data ?: return@launch
+                    )
+                    signInResult.data?.let { viewModel.saveDataUser(it) }
+                    viewModel.onSignInResult(signInResult)
+                }
+            } else if (result.resultCode == RESULT_CANCELED) {
+                viewModel.onSignInResult(
+                    SignInResult(
+                        null,
+                        errorMessage = CancellationException("Sign in Cancelled")
+                    )
+                )
+            }
+        }
+    )
 
     AnimatedVisibility(
         visible = visibleAnimationEnterScreen
@@ -169,148 +158,17 @@ fun LoginScreen(viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit) {
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_box_username_from_logo)))
 
-                OutlinedTextField(
-                    value = userNameValue,
-                    onValueChange = { newText ->
-                        userNameValue = newText
-                        validateUserName(userNameValue)
-
-                    },
-                    isError = isCorrectUserName,
-
-                    supportingText = {
-                        if (isCorrectUserName) {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = stringResource(id = R.string.username_incorrect),
-                                color = MaterialTheme.colorScheme.error
-                            )
-                        }
-                    },
-
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.user_name),
-                            modifier = Modifier.background(Transparent),
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    },
+                Text(
+                    text = stringResource(id = R.string.description_for_login),
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Transparent)
-                        .padding(start = 55.dp, end = 55.dp)
-                        .focusRequester(focusRequester)
+                        .wrapContentSize()
+                        .padding(start = 40.dp, end = 40.dp)
                         .animateEnterExit(enter = fadeIn(tween(1000, 1000))),
-                    textStyle = MaterialTheme.typography.bodyMedium,
-                    placeholder = {
-                        Text(
-                            text = USER_NAME,
-                            modifier = Modifier.background(Transparent),
-                            color = GrayDark,
-                            textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.bodyMedium
-
-                        )
-                    },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = (ImageVector.vectorResource(id = R.drawable.ic_mobile)),
-                            contentDescription = "Email Icon",
-                            tint = LocalCustomColorsPalette.current.iconColorPrimary
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Next
-                    ),
-
-                    keyboardActions = KeyboardActions {
-                        validateUserName(userNameValue)
-                        focusManager.moveFocus(
-                            focusDirection = FocusDirection.Next,
-                        )
-                    },
-
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = LocalCustomColorsPalette.current.textColorPrimary,
-                        unfocusedTextColor = GrayDark,
-                        focusedPlaceholderColor = LocalCustomColorsPalette.current.textColorPrimary,
-                        unfocusedPlaceholderColor = GrayDark,
-                        focusedContainerColor = MaterialTheme.colorScheme.background,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.background,
-                        focusedLabelColor = Green,
-                        unfocusedLabelColor = GrayDark,
-                        unfocusedBorderColor = GrayDark,
-                        focusedBorderColor = NavyColor,
-                        cursorColor = Green
-                    ),
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_radius_editText))
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                OutlinedTextField(
-                    value = passwordValue,
-                    onValueChange = { newText ->
-                        passwordValue = newText
-                        validatePassword(passwordValue)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Transparent)
-                        .padding(start = 55.dp, end = 55.dp)
-                        .animateEnterExit(enter = fadeIn(tween(1000, 1500))),
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.password),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.background(Transparent)
-                        )
-                    },
-                    isError = isCorrectPassword,
-                    supportingText = {
-                        if (isCorrectPassword) {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = stringResource(id = R.string.password_incorrect),
-                                color = MaterialTheme.colorScheme.error,
-                            )
-                        }
-                    },
-                    placeholder = {
-                        Text(
-                            text = PASSWORD,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = GrayMedium
-                        )
-                    },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = (ImageVector.vectorResource(id = R.drawable.ic_code)),
-                            contentDescription = "Code Icon",
-                            tint = LocalCustomColorsPalette.current.textColorPrimary
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        capitalization = KeyboardCapitalization.Sentences,
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Done
-                    ),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = LocalCustomColorsPalette.current.textColorPrimary,
-                        unfocusedTextColor = GrayDark,
-                        focusedPlaceholderColor = LocalCustomColorsPalette.current.textColorPrimary,
-                        unfocusedPlaceholderColor = GrayDark,
-                        focusedContainerColor = MaterialTheme.colorScheme.background,
-                        unfocusedContainerColor = MaterialTheme.colorScheme.background,
-                        focusedLabelColor = Green,
-                        unfocusedLabelColor = GrayDark,
-                        unfocusedBorderColor = GrayDark,
-                        focusedBorderColor = NavyColor,
-                        cursorColor = Green
-                    ),
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_radius_editText))
+                    color = NavyColor,
+                    textAlign = TextAlign.Center,
+                    overflow = TextOverflow.Clip,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold
                 )
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_btn_regiter_from_lbl_family_sign_up)))
@@ -320,42 +178,22 @@ fun LoginScreen(viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit) {
                         .fillMaxWidth()
                         .height(dimensionResource(id = R.dimen.size_height_button))
                         .padding(start = 55.dp, end = 55.dp)
-                        .animateEnterExit(enter = fadeIn(tween(1000, 2000)))
+                        .animateEnterExit(enter = fadeIn(tween(1000, 1500)))
                         .shadow(elevation = 8.dp, shape = RoundedCornerShape(28.dp))
-                        .clickable(enabled = statusEnabledCardLogin) {
-                            if (checkFieldForValidation(
-                                    userNameValue,
-                                    passwordValue,
-                                    snackbarHostState,
-                                    coroutineScope,
-                                    context
+                        .clickable {
+                            isLoadingVisible = true
+                            coroutineScope.launch {
+                                viewModel.resetState()
+                                val signInIntentSender = viewModel.googleAuthUiClient.signIn()
+                                launcher.launch(
+                                    IntentSenderRequest
+                                        .Builder(
+                                            signInIntentSender ?: return@launch
+                                        )
+                                        .build()
                                 )
-                            ) {
-                                if (checkAuthentication(
-                                        userNameValue.lowercase(),
-                                        passwordValue,
-                                        snackbarHostState,
-                                        coroutineScope,
-                                        context
-                                    )
-                                ) {
-                                    keyboardController?.hide()
-                                    focusManager.clearFocus()
-                                    statusEnabledCardLogin = false
-                                    coroutineScope.launch(Dispatchers.IO) {
-                                        viewModel.userPreferencesRepository.setStatusLoginUser(true)
-                                    }
-                                    isLoadingVisible = !isLoadingVisible
-                                    coroutineScope.launch {
-                                        delay(3000)
-                                        isLoadingVisible = !isLoadingVisible
-                                        delay(500)
-                                        navToMainScreen()
-                                    }
-                                }
                             }
                         },
-
                     elevation = CardDefaults.cardElevation(
                         defaultElevation = 8.dp, pressedElevation = 16.dp
                     ),
@@ -417,37 +255,18 @@ fun LoginScreen(viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit) {
         visibleAnimationEnterScreen = true
     }
 
-}
+    LaunchedEffect(key1 = authState) {
 
-fun checkFieldForValidation(
-    userName: String,
-    password: String,
-    snackbarHostState: SnackbarHostState,
-    coroutineScope: CoroutineScope,
-    context: Context
-): Boolean {
-    return if (userName.isEmpty() || password.isEmpty()) {
-        coroutineScope.launch { snackbarHostState.showSnackbar(context.getString(R.string.please_enter_fields)) }
-        false
-    } else {
-        true
-    }
-}
+        when (authState) {
+            is AuthState.Authenticated -> {
+                navToMainScreen()
+            }
 
-fun checkAuthentication(
-    userName: String,
-    password: String,
-    snackbarHostState: SnackbarHostState,
-    coroutineScope: CoroutineScope,
-    context: Context
-) = when {
+            is AuthState.Error -> {
+                authState.exception?.localizedMessage?.let { snackbarHostState.showSnackbar(it) }
+            }
 
-    (userName == USER_NAME && password == PASSWORD) -> {
-        true
-    }
-
-    else -> {
-        coroutineScope.launch { snackbarHostState.showSnackbar(context.getString(R.string.message_when_username_password_incorrect)) }
-        false
+            else -> {}
+        }
     }
 }

@@ -53,6 +53,7 @@ dependencies {
     implementation(projects.core.datastore)
     implementation(projects.core.model)
     implementation(projects.core.designsystem)
+    implementation(projects.core.firebase)
     implementation(projects.feature.splash)
     implementation(projects.feature.login)
     implementation(projects.feature.main)

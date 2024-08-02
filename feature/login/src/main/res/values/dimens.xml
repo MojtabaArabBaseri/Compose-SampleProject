@@ -3,7 +3,7 @@
 
     <dimen name="size_radius_editText">10dp</dimen>
     <dimen name="space_logo_from_top">130dp</dimen>
-    <dimen name="space_box_username_from_logo">30dp</dimen>
+    <dimen name="space_box_username_from_logo">60dp</dimen>
     <dimen name="size_height_button">56dp</dimen>
     <dimen name="space_btn_regiter_from_lbl_family_sign_up">84dp</dimen>
 

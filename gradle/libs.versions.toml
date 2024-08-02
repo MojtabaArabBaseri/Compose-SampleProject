@@ -60,6 +60,8 @@ firebaseBomVersion = "33.1.2"
 firebaseVersion = "4.4.2"
 firebaseMessagingKtxVersion = "24.0.0"
 firebaseCrashlyticsVersion = "3.0.2"
+playServicesAuth = "21.2.0"
+lifecycleRuntimeComposeAndroidVersion = "2.8.4"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
@@ -136,11 +138,14 @@ ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 viewpump = { module = "io.github.inflationx:viewpump", version.ref = "viewpumpVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroidVersion" }
-firebase-bom = { group = "com.google.firebase", name = "firebase-bom",version.ref = "firebaseBomVersion" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBomVersion" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 firebase-crashlytics-ktx = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtxVersion" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroidVersion" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

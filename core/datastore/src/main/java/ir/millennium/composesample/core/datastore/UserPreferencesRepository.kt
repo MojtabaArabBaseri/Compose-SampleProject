@@ -7,7 +7,10 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.google.firebase.auth.FirebaseUser
+import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
+import ir.millennium.composesample.core.model.UserData
 import ir.millennium.composesample.core.model.entity.TypeLanguage
 import ir.millennium.composesample.core.model.entity.TypeTheme
 import kotlinx.coroutines.flow.catch
@@ -22,7 +25,10 @@ const val TAG = "user_preferences_repository"
 private val Context.dataStore by preferencesDataStore(TAG)
 
 @Singleton
-class UserPreferencesRepository @Inject constructor(@ApplicationContext appContext: Context) {
+class UserPreferencesRepository @Inject constructor(
+    @ApplicationContext appContext: Context,
+    val gson: Gson
+) {
 
     private val settingsDataStore = appContext.dataStore
 
@@ -30,6 +36,7 @@ class UserPreferencesRepository @Inject constructor(@ApplicationContext appConte
         val STATUS_LOGIN_USER = booleanPreferencesKey("status_login_user")
         val TYPE_THEME = intPreferencesKey("type_theme")
         val LANGUAGE_APP = stringPreferencesKey("language_app")
+        val USER = stringPreferencesKey("user")
     }
 
     suspend fun setStatusLoginUser(statusLoginUser: Boolean) {
@@ -81,5 +88,23 @@ class UserPreferencesRepository @Inject constructor(@ApplicationContext appConte
         }
     }.map { preferences ->
         preferences[PreferencesKeys.LANGUAGE_APP] ?: TypeLanguage.ENGLISH.typeLanguage
+    }
+
+    suspend fun setDataUser(user: UserData) {
+        settingsDataStore.edit { preferences ->
+            preferences[PreferencesKeys.USER] = gson.toJson(user)
+        }
+    }
+
+    val userData = settingsDataStore.data.catch { exception ->
+        if (exception is IOException) {
+            Timber.tag(TAG).e(exception, "Error reading preferences.")
+            emit(emptyPreferences())
+        } else {
+            throw exception
+        }
+    }.map { preferences ->
+        val user = preferences[PreferencesKeys.USER]
+        gson.fromJson(user, UserData::class.java)
     }
 }

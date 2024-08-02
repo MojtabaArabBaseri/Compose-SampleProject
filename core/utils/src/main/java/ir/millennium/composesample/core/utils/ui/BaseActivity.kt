@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
+import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
@@ -27,7 +28,10 @@ abstract class BaseActivity : ComponentActivity() {
 
     override fun attachBaseContext(newBase: Context) {
         val newConfiguration = Configuration(newBase.resources?.configuration)
-        val locale = runBlocking { Locale(UserPreferencesRepository(newBase).languageApp.first()) }
+        val gson = GsonBuilder().serializeNulls().create()
+        val userPreferencesRepository = UserPreferencesRepository(newBase, gson)
+        val locale =
+            runBlocking { Locale(userPreferencesRepository.languageApp.first()) }
         newConfiguration.fontScale = 1.0f
         Locale.setDefault(locale)
         newConfiguration.setLocale(locale)

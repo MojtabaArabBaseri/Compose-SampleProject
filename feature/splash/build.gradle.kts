@@ -8,4 +8,6 @@ android {
 
 dependencies {
 
+    implementation(projects.core.firebase)
+
 }

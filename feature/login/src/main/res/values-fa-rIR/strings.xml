@@ -3,8 +3,9 @@
     <string name="app_name">هزاره، کامپوز</string>
     <string name="title_application">هزاره</string>
     <string name="description_application">گروه داده پردازی هزاره</string>
+    <string name="description_for_login">لطفاً از طریق حساب کاربری گوگل خود وارد شوید. با استفاده از ورود گوگل، امنیت و راحتی بیشتری خواهید داشت</string>
     <string name="copyright">طراحی شده توسط مجتبی عرب باصری</string>
-    <string name="login">ورود</string>
+    <string name="login">ورود با حساب کاربری گوگل</string>
     <string name="user_name">نام کاربری: Mojtaba</string>
     <string name="password">پسورد: 123456</string>
     <string name="username_incorrect">نام کاربری اشتباه است</string>
