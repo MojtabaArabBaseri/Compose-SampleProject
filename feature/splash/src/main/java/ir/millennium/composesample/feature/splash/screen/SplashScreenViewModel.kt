@@ -25,8 +25,8 @@ open class SplashScreenViewModel @Inject constructor(
     private var _typeTheme = runBlocking { MutableStateFlow(statusThemeFlow.first()) }
     val typeTheme: StateFlow<Int> = _typeTheme
 
-    private val _authState = MutableStateFlow<AuthState>(AuthState.Initialization)
-    val authState: StateFlow<AuthState> = _authState.asStateFlow()
+    private val _authState = MutableStateFlow<AuthState?>(null)
+    val authState: StateFlow<AuthState?> = _authState.asStateFlow()
 
     fun isUserLogin() {
         val currentUser = googleAuthUiClient.getSignedInUser()

@@ -75,7 +75,7 @@ import kotlinx.coroutines.launch
 fun LoginScreen(
     viewModel: LoginScreenViewModel,
     navToMainScreen: () -> Unit,
-    authState: AuthState
+    authState: AuthState?
 ) {
     val coroutineScope = rememberCoroutineScope()
 

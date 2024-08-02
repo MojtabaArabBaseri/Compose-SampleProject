@@ -32,7 +32,7 @@ fun SplashScreen(
     viewModel: SplashScreenViewModel,
     navToLoginScreen: () -> Unit,
     navToMainScreen: () -> Unit,
-    authState: AuthState
+    authState: AuthState?
 ) {
 
     var isVisibleLogo by rememberSaveable { mutableStateOf(false) }

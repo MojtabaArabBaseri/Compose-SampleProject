@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
+import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.firebase.authentication.GoogleAuthUiClient
 import ir.millennium.composesample.core.firebase.authentication.SignInResult
-import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.model.UserData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,8 +26,8 @@ open class LoginScreenViewModel @Inject constructor(
     private var _typeTheme = runBlocking { MutableStateFlow(statusThemeFlow.first()) }
     val typeTheme: StateFlow<Int> = _typeTheme
 
-    private val _authState = MutableStateFlow<AuthState>(AuthState.Initialization)
-    val authState: StateFlow<AuthState> = _authState.asStateFlow()
+    private val _authState = MutableStateFlow<AuthState?>(null)
+    val authState: StateFlow<AuthState?> = _authState.asStateFlow()
 
     fun onSignInResult(result: SignInResult) {
 
@@ -43,6 +43,6 @@ open class LoginScreenViewModel @Inject constructor(
     }
 
     fun resetState() {
-        _authState.value = AuthState.Initialization
+        _authState.value = null
     }
 }
