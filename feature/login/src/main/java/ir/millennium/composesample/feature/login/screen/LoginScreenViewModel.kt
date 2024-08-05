@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -24,7 +25,7 @@ open class LoginScreenViewModel @Inject constructor(
 
     private val statusThemeFlow = userPreferencesRepository.statusTheme
     private var _typeTheme = runBlocking { MutableStateFlow(statusThemeFlow.first()) }
-    val typeTheme: StateFlow<Int> = _typeTheme
+    val typeTheme: StateFlow<Int> = _typeTheme.asStateFlow()
 
     private val _authState = MutableStateFlow<AuthState?>(null)
     val authState: StateFlow<AuthState?> = _authState.asStateFlow()
@@ -32,9 +33,9 @@ open class LoginScreenViewModel @Inject constructor(
     fun onSignInResult(result: SignInResult) {
 
         if (result.data != null) {
-            _authState.value = AuthState.Authenticated(result.data)
+            _authState.update { AuthState.Authenticated(result.data) }
         } else {
-            _authState.value = AuthState.Error(result.errorMessage)
+            _authState.update { AuthState.Error(result.errorMessage) }
         }
     }
 
@@ -43,6 +44,6 @@ open class LoginScreenViewModel @Inject constructor(
     }
 
     fun resetState() {
-        _authState.value = null
+        _authState.update { null }
     }
 }

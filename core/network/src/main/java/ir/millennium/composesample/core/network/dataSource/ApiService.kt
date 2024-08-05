@@ -9,7 +9,7 @@ interface ApiService {
 
     @GET("everything")
     suspend fun getArticlesWithPager(
-        @QueryMap headerMap: MutableMap<String, Any>,
+        @QueryMap headerMap: HashMap<String, String>,
         @Query("page") page: Int
     ): ResponseArticlesModel
 }

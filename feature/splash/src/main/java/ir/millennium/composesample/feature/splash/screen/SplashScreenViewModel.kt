@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -31,9 +32,9 @@ open class SplashScreenViewModel @Inject constructor(
     fun isUserLogin() {
         val currentUser = googleAuthUiClient.getSignedInUser()
         if (currentUser != null) {
-            _authState.value = AuthState.Authenticated(currentUser)
+            _authState.update { AuthState.Authenticated(currentUser) }
         } else {
-            _authState.value = AuthState.Unauthenticated
+            _authState.update { AuthState.Unauthenticated }
         }
     }
 

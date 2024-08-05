@@ -25,23 +25,20 @@ class ArticleRemoteMediator(
         return try {
             val loadKey = when (loadType) {
                 LoadType.REFRESH -> 1
-                LoadType.PREPEND -> return MediatorResult.Success(
-                    endOfPaginationReached = true
-                )
-
+                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
-                    if (lastItem == null) {
-                        1
-                    } else {
-                        (lastItem.id / state.config.pageSize) + 1
-                    }
+                    lastItem?.let {
+                        (it.id / state.config.pageSize) + 1
+                    } ?: 1
                 }
             }
-            val headerMap = mutableMapOf<String, Any>()
-            headerMap["apiKey"] = Constants.API_KEY
-            headerMap["from"] = "2023-07-00"
-            headerMap["q"] = "tesla"
+
+            val headerMap = hashMapOf(
+                "apiKey" to Constants.API_KEY,
+                "from" to "2023-07-00",
+                "q" to "tesla"
+            )
 
             val movieListModel = apiService.getArticlesWithPager(
                 headerMap = headerMap,
@@ -52,14 +49,11 @@ class ArticleRemoteMediator(
                 if (loadType == LoadType.REFRESH) {
                     appDatabase.articleDao().clearAll()
                 }
-
-                val movieEntityList = movieListModel.articles?.map { it.mapToArticleEntity() }
-                movieEntityList?.let { appDatabase.articleDao().upsertAll(it) }
+                movieListModel.articles?.map { it.mapToArticleEntity() }
+                    ?.let { appDatabase.articleDao().upsertAll(it) }
             }
 
-            MediatorResult.Success(
-                endOfPaginationReached = movieListModel.articles?.isEmpty()!!
-            )
+            MediatorResult.Success(endOfPaginationReached = movieListModel.articles?.isEmpty() == true)
         } catch (e: IOException) {
             MediatorResult.Error(e)
         } catch (e: HttpException) {

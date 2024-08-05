@@ -8,6 +8,5 @@ android {
 
 dependencies {
     api(projects.core.network)
-    api(projects.core.model)
     api(projects.core.database)
 }

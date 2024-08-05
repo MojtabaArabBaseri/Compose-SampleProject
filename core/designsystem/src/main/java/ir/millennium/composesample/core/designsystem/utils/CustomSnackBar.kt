@@ -77,16 +77,16 @@ fun CustomSnackBar(
                 .background(Green)
                 .padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 6.dp)
         ) {
-            val (TextRef, ButtonRef) = createRefs()
+            val (textRef, buttonRef) = createRefs()
 
             Text(
                 text = snackbarData.visuals.message, modifier = Modifier
-                    .constrainAs(TextRef) {
+                    .constrainAs(textRef) {
                         top.linkTo(parent.top)
                         bottom.linkTo(parent.bottom)
                         start.linkTo(parent.start)
                         end.linkTo(
-                            if (snackbarData.visuals.actionLabel != null) ButtonRef.start else parent.end,
+                            if (snackbarData.visuals.actionLabel != null) buttonRef.start else parent.end,
                             8.dp
                         )
                         width = Dimension.fillToConstraints
@@ -102,7 +102,7 @@ fun CustomSnackBar(
                         snackbarData.performAction()
                         snackbarStatus.value = false
                     },
-                    modifier = Modifier.constrainAs(ButtonRef) {
+                    modifier = Modifier.constrainAs(buttonRef) {
                         top.linkTo(parent.top)
                         bottom.linkTo(parent.bottom)
                         end.linkTo(parent.end)
