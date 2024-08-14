@@ -34,13 +34,6 @@ open class MainActivityViewModel @Inject constructor(
         initialValue = TypeLanguage.ENGLISH.typeLanguage
     )
 
-    val shareIn =
-        languageAppFlow.shareIn(
-            scope = viewModelScope,
-            started = SharingStarted.Eagerly,
-            replay = 1
-        )
-
     private val _authScreen = MutableStateFlow(true)
     val authScreen: StateFlow<Boolean> = _authScreen.asStateFlow()
 
