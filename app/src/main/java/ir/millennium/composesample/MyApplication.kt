@@ -17,22 +17,26 @@ class MyApplication : Application() {
     @Inject
     lateinit var manageChannelNotification: ManageChannelNotification
 
+    @Inject
+    lateinit var releaseTree: ReleaseTree
+
     private val isDebuggable by lazy { 0 != applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE }
 
     override fun onCreate() {
         super.onCreate()
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 
-        setupTimber(isDebuggable)
+        setupTimber(isDebuggable, releaseTree)
 
         manageChannelNotification.createAllChannelNotification()
     }
 }
 
-private fun setupTimber(isDebuggable: Boolean) {
+private fun setupTimber(isDebuggable: Boolean, releaseTree: ReleaseTree) {
+
     if (isDebuggable) {
         Timber.plant(DebugTree())
     } else {
-        Timber.plant(ReleaseTree())
+        Timber.plant(releaseTree)
     }
 }

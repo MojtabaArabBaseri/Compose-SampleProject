@@ -33,7 +33,7 @@ import ir.millennium.composesample.core.model.entity.UserProfileSocialNetworkEnt
 import ir.millennium.composesample.feature.aboutme.R
 
 @Composable
-fun rowSocialNetwork(item: UserProfileSocialNetworkEntity) {
+fun RowSocialNetwork(item: UserProfileSocialNetworkEntity) {
     val context = LocalContext.current
     Card(
         modifier = Modifier

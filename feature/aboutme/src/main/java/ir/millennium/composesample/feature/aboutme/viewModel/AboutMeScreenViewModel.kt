@@ -1,4 +1,4 @@
-package ir.millennium.composesample.feature.aboutme.screen
+package ir.millennium.composesample.feature.aboutme.viewModel
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.ViewModel
@@ -13,13 +13,13 @@ import javax.inject.Inject
 @HiltViewModel
 open class AboutMeScreenViewModel @Inject constructor(
     userPreferencesRepository: UserPreferencesRepository
-) : ViewModel() {
+) : ViewModel(), IAboutMeScreenViewModel {
 
-    val stateLazyColumn = LazyListState()
+    override val stateLazyColumn = LazyListState()
 
     private val languageAppFlow = userPreferencesRepository.languageApp
     private val _languageApp = runBlocking { MutableStateFlow(languageAppFlow.first()) }
-    val languageApp: StateFlow<String> = _languageApp
+    override val languageApp: StateFlow<String> = _languageApp
 
 }
 

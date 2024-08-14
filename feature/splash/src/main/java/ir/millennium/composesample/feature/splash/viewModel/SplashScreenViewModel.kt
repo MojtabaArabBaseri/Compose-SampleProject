@@ -1,4 +1,4 @@
-package ir.millennium.composesample.feature.splash.screen
+package ir.millennium.composesample.feature.splash.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,16 +20,16 @@ import javax.inject.Inject
 open class SplashScreenViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
     private val googleAuthUiClient: GoogleAuthUiClient
-) : ViewModel() {
+) : ViewModel(), ISplashScreenViewModel {
 
     private val statusThemeFlow = userPreferencesRepository.statusTheme
     private var _typeTheme = runBlocking { MutableStateFlow(statusThemeFlow.first()) }
-    val typeTheme: StateFlow<Int> = _typeTheme
+    override val typeTheme: StateFlow<Int> = _typeTheme
 
     private val _authState = MutableStateFlow<AuthState?>(null)
-    val authState: StateFlow<AuthState?> = _authState.asStateFlow()
+    override val authState: StateFlow<AuthState?> = _authState.asStateFlow()
 
-    fun isUserLogin() {
+    override fun isUserLogin() {
         val currentUser = googleAuthUiClient.getSignedInUser()
         if (currentUser != null) {
             _authState.update { AuthState.Authenticated(currentUser) }
@@ -38,7 +38,7 @@ open class SplashScreenViewModel @Inject constructor(
         }
     }
 
-    fun saveUserData(userData: UserData) {
+    override fun saveUserData(userData: UserData) {
         viewModelScope.launch { userPreferencesRepository.setDataUser(userData) }
     }
 }

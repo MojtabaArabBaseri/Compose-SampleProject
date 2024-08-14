@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -34,10 +35,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ir.millennium.composesample.core.designsystem.theme.AppFont
 import ir.millennium.composesample.core.designsystem.theme.Green
@@ -48,11 +51,14 @@ import ir.millennium.composesample.core.model.entity.TypeLanguage
 import ir.millennium.composesample.feature.aboutme.Constants.USER_PROFILE_DATA
 import ir.millennium.composesample.feature.aboutme.R
 import ir.millennium.composesample.feature.aboutme.dialogs.AboutMeDialog
+import ir.millennium.composesample.feature.aboutme.viewModel.FakeAboutMeScreenViewModel
+import ir.millennium.composesample.feature.aboutme.viewModel.IAboutMeScreenViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutMeScreen(viewModel: AboutMeScreenViewModel) {
+fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
 
     val modalBottomSheetState = rememberModalBottomSheetState()
     var isExpandedBottomSheet by rememberSaveable { mutableStateOf(false) }
@@ -60,12 +66,13 @@ fun AboutMeScreen(viewModel: AboutMeScreenViewModel) {
     val systemUiController = rememberSystemUiController()
     val localCustomColorsPalette = LocalCustomColorsPalette.current
 
+    val languageApp by viewModel.languageApp.collectAsStateWithLifecycle()
+
     Scaffold {
         LazyColumn(
             state = viewModel.stateLazyColumn,
             modifier = Modifier
                 .fillMaxSize()
-//                .padding(bottom = bottomPaddingMainScreen)
                 .background(Color.Transparent),
         ) {
 
@@ -100,7 +107,7 @@ fun AboutMeScreen(viewModel: AboutMeScreenViewModel) {
                             },
                         style = TextStyle(
                             fontSize = 26.sp,
-                            fontFamily = if (viewModel.languageApp.value == TypeLanguage.PERSIAN.typeLanguage) AppFont.FontPersian else AppFont.FontEnglish,
+                            fontFamily = if (languageApp == TypeLanguage.PERSIAN.typeLanguage) AppFont.FontPersian else AppFont.FontEnglish,
                             fontWeight = FontWeight.Bold,
                             fontStyle = FontStyle.Italic,
                             letterSpacing = 1.sp,
@@ -115,7 +122,7 @@ fun AboutMeScreen(viewModel: AboutMeScreenViewModel) {
             }
 
             items(items = USER_PROFILE_DATA.socialNetwork) { item ->
-                rowSocialNetwork(item)
+                RowSocialNetwork(item)
             }
 
             item {
@@ -153,4 +160,14 @@ fun AboutMeScreen(viewModel: AboutMeScreenViewModel) {
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun AboutMeScreenPreview() {
+    AboutMeScreen(
+        viewModel = FakeAboutMeScreenViewModel(
+            MutableStateFlow(TypeLanguage.PERSIAN.typeLanguage), LazyListState()
+        )
+    )
 }

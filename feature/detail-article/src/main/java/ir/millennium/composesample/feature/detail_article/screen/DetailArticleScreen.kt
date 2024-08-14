@@ -73,10 +73,9 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
                 .verticalScroll(scrollSate)
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            TopAppBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
+            TopAppBar(modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
                 windowInsets = WindowInsets(
                     top = 0, bottom = 0
                 ),

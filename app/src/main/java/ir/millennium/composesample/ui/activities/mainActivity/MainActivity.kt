@@ -7,15 +7,13 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.google.android.gms.auth.api.identity.Identity
 import dagger.hilt.android.AndroidEntryPoint
 import ir.millennium.composesample.core.designsystem.theme.AppTheme
-import ir.millennium.composesample.core.firebase.authentication.GoogleAuthUiClient
 import ir.millennium.composesample.core.utils.ui.BaseActivity
 import ir.millennium.composesample.feature.login.navigation.LOGIN_SCREEN_ROUTE
 import ir.millennium.composesample.feature.splash.navigation.SPLASH_SCREEN_ROUTE
@@ -41,14 +39,17 @@ class MainActivity : BaseActivity() {
                 else -> mainActivityViewModel.onAuthScreen(false)
             }
 
+            val stateLanguage by mainActivityViewModel.stateLanguage.collectAsStateWithLifecycle()
+            val stateTheme by mainActivityViewModel.stateTheme.collectAsStateWithLifecycle()
+            val stateAuthScreen by mainActivityViewModel.authScreen.collectAsStateWithLifecycle()
+
             AppTheme(
-                typeTheme = mainActivityViewModel.typeTheme.collectAsState().value,
-                authScreens = mainActivityViewModel.authScreen.collectAsState().value,
-                languageApp = mainActivityViewModel.languageApp.collectAsState().value
+                typeTheme = stateTheme,
+                authScreens = stateAuthScreen,
+                languageApp = stateLanguage
             ) {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     NavGraph(navController)
                 }

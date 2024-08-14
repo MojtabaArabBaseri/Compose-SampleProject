@@ -51,6 +51,8 @@ class LibraryPlugin : Plugin<Project> {
                 add("testImplementation", libs.findLibrary("junit").get())
                 add("androidTestImplementation", libs.findLibrary("androidx.junit").get())
                 add("androidTestImplementation", libs.findLibrary("androidx.espresso.core").get())
+                add("testImplementation", libs.findLibrary("mockk").get())
+                add("implementation", libs.findLibrary("mockk").get())
             }
         }
     }

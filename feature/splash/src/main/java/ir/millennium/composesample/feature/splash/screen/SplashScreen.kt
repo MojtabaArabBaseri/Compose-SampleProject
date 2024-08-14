@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -20,30 +19,36 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.model.entity.TypeTheme
 import ir.millennium.composesample.feature.splash.Constants
 import ir.millennium.composesample.feature.splash.R
+import ir.millennium.composesample.feature.splash.viewModel.FakeSplashScreenViewModel
+import ir.millennium.composesample.feature.splash.viewModel.ISplashScreenViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun SplashScreen(
-    viewModel: SplashScreenViewModel,
+    viewModel: ISplashScreenViewModel,
     navToLoginScreen: () -> Unit,
     navToMainScreen: () -> Unit,
     authState: AuthState?
 ) {
 
     var isVisibleLogo by rememberSaveable { mutableStateOf(false) }
-    val stateTheme = viewModel.typeTheme.collectAsState()
+    val stateTheme by viewModel.typeTheme.collectAsStateWithLifecycle()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .navigationBarsPadding()
             .paint(
-                painterResource(id = if (stateTheme.value == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_splash_light_theme),
+                painterResource(id = if (stateTheme == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_splash_light_theme),
                 contentScale = ContentScale.FillBounds
             ), contentAlignment = Alignment.Center
     ) {
@@ -52,7 +57,7 @@ fun SplashScreen(
         ) {
             Image(
                 painter = painterResource(
-                    id = if (stateTheme.value == TypeTheme.DARK.typeTheme) {
+                    id = if (stateTheme == TypeTheme.DARK.typeTheme) {
                         R.drawable.ic_logo_complete_light
                     } else {
                         R.drawable.ic_logo_complete_dark
@@ -84,4 +89,29 @@ fun SplashScreen(
             else -> {}
         }
     }
+}
+
+/* for landscape mode
+@Preview(
+    device = "spec:width=720dp,height=360dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape",
+    showSystemUi = true,
+    uiMode = Configuration.ORIENTATION_LANDSCAPE,
+)*/
+@Preview(
+    device = Devices.PHONE,
+    showSystemUi = false
+)
+@Composable
+fun SplashScreenPreview() {
+
+    val viewModel = FakeSplashScreenViewModel(
+        MutableStateFlow(TypeTheme.LIGHT.typeTheme), MutableStateFlow(null)
+    )
+
+    SplashScreen(
+        viewModel = viewModel,
+        navToLoginScreen = {},
+        navToMainScreen = {},
+        authState = null
+    )
 }

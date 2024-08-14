@@ -106,16 +106,9 @@ fun MainScreen(
         mutableIntStateOf(0)
     }
 
-//    val isScrolled = if (bottomNavState == 0) {
-//        mutableStateOf(homeScreenViewModel.stateLazyColumn.isScrollingUp())
-//    } else {
-//        mutableStateOf(articleScreenViewModel.stateLazyColumn.isScrollingUp())
-//    }
-
     Scaffold(
         bottomBar = {
             AnimatedVisibility(
-//                visible = isScrolled.value,
                 visible = true,
                 enter = slideInVertically(
                     initialOffsetY = { it },
@@ -223,7 +216,6 @@ fun MainScreen(
                             } else {
                                 viewModel.userPreferencesRepository.setStatusTheme(TypeTheme.DARK.typeTheme)
                             }
-                            (context as? Activity)?.recreate()
                         }
                     }) {
                         Icon(

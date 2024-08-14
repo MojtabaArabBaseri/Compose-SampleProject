@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import ir.millennium.composesample.feature.splash.screen.SplashScreen
-import ir.millennium.composesample.feature.splash.screen.SplashScreenViewModel
+import ir.millennium.composesample.feature.splash.viewModel.SplashScreenViewModel
 
 const val SPLASH_SCREEN_ROUTE = "SplashScreen"
 
@@ -26,6 +26,7 @@ fun NavGraphBuilder.splashScreen(
     composable(route = SPLASH_SCREEN_ROUTE,
         enterTransition = { enterTransient() },
         exitTransition = { exitTransient() }) {
+
         val viewModel = hiltViewModel<SplashScreenViewModel>(it)
         val authState by viewModel.authState.collectAsStateWithLifecycle()
 

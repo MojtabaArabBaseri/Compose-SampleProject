@@ -4,7 +4,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import ir.millennium.composesample.feature.aboutme.screen.AboutMeScreen
-import ir.millennium.composesample.feature.aboutme.screen.AboutMeScreenViewModel
+import ir.millennium.composesample.feature.aboutme.viewModel.AboutMeScreenViewModel
 import ir.millennium.composesample.feature.articles.screen.ArticleScreen
 import ir.millennium.composesample.feature.articles.screen.ArticleScreenViewModel
 import ir.millennium.composesample.feature.detail_article.navigation.detailArticleScreen

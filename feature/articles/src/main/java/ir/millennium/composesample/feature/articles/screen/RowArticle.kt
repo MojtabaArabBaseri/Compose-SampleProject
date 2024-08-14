@@ -49,7 +49,6 @@ fun rowArticle(
             .clickable {
                 val articleItemJson = Uri.encode(Gson().toJson(articleItem))
                 navToDetailArticleScreen(articleItemJson)
-//                navController.navigate("${Screens.DetailArticleScreenRoute.route}?articleItem=$articleItemJson")
             },
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_radius_editText)),
         colors = CardDefaults.cardColors(containerColor = LocalCustomColorsPalette.current.rowSocialNetworkBackground)

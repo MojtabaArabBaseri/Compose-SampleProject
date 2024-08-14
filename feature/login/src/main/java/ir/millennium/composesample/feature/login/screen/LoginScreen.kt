@@ -85,7 +85,7 @@ fun LoginScreen(
 
     var visibleAnimationEnterScreen by rememberSaveable { mutableStateOf(false) }
 
-    val stateTheme = viewModel.typeTheme.collectAsStateWithLifecycle()
+    val stateTheme by viewModel.typeTheme.collectAsStateWithLifecycle()
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartIntentSenderForResult(),
@@ -118,7 +118,7 @@ fun LoginScreen(
                 .fillMaxSize()
                 .navigationBarsPadding()
                 .paint(
-                    painterResource(id = if (stateTheme.value == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_login_light_theme),
+                    painterResource(id = if (stateTheme == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_login_light_theme),
                     contentScale = ContentScale.FillBounds
                 )
         ) {
