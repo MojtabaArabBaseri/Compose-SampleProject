@@ -1,6 +1,5 @@
 package ir.millennium.composesample.feature.login.screen
 
-import android.annotation.SuppressLint
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -11,7 +10,6 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,8 +24,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
@@ -35,7 +33,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,32 +59,27 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
-import ir.millennium.composesample.core.firebase.authentication.SignInResult
 import ir.millennium.composesample.core.firebase.authentication.AuthState
+import ir.millennium.composesample.core.firebase.authentication.SignInResult
 import ir.millennium.composesample.core.model.entity.TypeTheme
 import ir.millennium.composesample.feature.login.R
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 @OptIn(ExperimentalAnimationApi::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(
-    viewModel: LoginScreenViewModel,
-    navToMainScreen: () -> Unit,
-    authState: AuthState?
+    viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit, authState: AuthState?
 ) {
     val coroutineScope = rememberCoroutineScope()
-
     val snackbarHostState = remember { SnackbarHostState() }
-
     var isLoadingVisible by rememberSaveable { mutableStateOf(false) }
-
     var visibleAnimationEnterScreen by rememberSaveable { mutableStateOf(false) }
+    var elevationButton by remember { mutableStateOf(0.dp) }
+    val enableButton = remember { derivedStateOf { !isLoadingVisible } }
 
     val stateTheme by viewModel.typeTheme.collectAsStateWithLifecycle()
-
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartIntentSenderForResult(),
         onResult = { result ->
@@ -102,23 +95,22 @@ fun LoginScreen(
             } else if (result.resultCode == RESULT_CANCELED) {
                 viewModel.onSignInResult(
                     SignInResult(
-                        null,
-                        errorMessage = CancellationException("Sign in Cancelled")
+                        null, errorMessage = CancellationException("Sign in Cancelled")
                     )
                 )
             }
-        }
-    )
+        })
 
-    AnimatedVisibility(
-        visible = visibleAnimationEnterScreen
-    ) {
+    AnimatedVisibility(visible = visibleAnimationEnterScreen) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .navigationBarsPadding()
                 .paint(
-                    painterResource(id = if (stateTheme == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_login_light_theme),
+                    painterResource(
+                        id = if (stateTheme == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme
+                        else R.drawable.background_login_light_theme
+                    ),
                     contentScale = ContentScale.FillBounds
                 )
         ) {
@@ -129,8 +121,7 @@ fun LoginScreen(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
-                Spacer(modifier = Modifier.height(dimensionResource(id = ir.millennium.composesample.core.designsystem.R.dimen.space_logo_from_top)))
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_logo_from_top)))
 
                 Text(
                     text = stringResource(id = R.string.title_application),
@@ -173,38 +164,36 @@ fun LoginScreen(
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_btn_regiter_from_lbl_family_sign_up)))
 
-                Card(
+                Button(
+                    onClick = {
+                        isLoadingVisible = true
+                        coroutineScope.launch {
+                            viewModel.resetState()
+                            val signInIntentSender = viewModel.googleAuthUiClient.signIn()
+                            launcher.launch(
+                                IntentSenderRequest.Builder(signInIntentSender ?: return@launch)
+                                    .build()
+                            )
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(dimensionResource(id = R.dimen.size_height_button))
                         .padding(start = 55.dp, end = 55.dp)
-                        .animateEnterExit(enter = fadeIn(tween(1000, 1500)))
-                        .shadow(elevation = 8.dp, shape = RoundedCornerShape(28.dp))
-                        .clickable {
-                            isLoadingVisible = true
-                            coroutineScope.launch {
-                                viewModel.resetState()
-                                val signInIntentSender = viewModel.googleAuthUiClient.signIn()
-                                launcher.launch(
-                                    IntentSenderRequest
-                                        .Builder(
-                                            signInIntentSender ?: return@launch
-                                        )
-                                        .build()
-                                )
-                            }
-                        },
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 8.dp, pressedElevation = 16.dp
-                    ),
+                        .shadow(elevationButton, RoundedCornerShape(28.dp))
+                        .animateEnterExit(enter = fadeIn(tween(1000, 1500))),
+                    enabled = enableButton.value,
                     shape = RoundedCornerShape(28.dp),
-                    colors = CardDefaults.cardColors(containerColor = Green)
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Green,
+                        disabledContainerColor = Green
+                    )
                 ) {
                     Crossfade(
                         modifier = Modifier.fillMaxSize(),
                         targetState = isLoadingVisible,
                         animationSpec = tween(400),
-                        label = ""
+                        label = "runAnimButton"
                     ) { isLoadingVisible ->
                         Box(
                             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
@@ -219,7 +208,6 @@ fun LoginScreen(
                             } else {
                                 Text(
                                     text = stringResource(id = R.string.login),
-                                    modifier = Modifier.wrapContentSize(),
                                     color = NavyColor,
                                     fontWeight = FontWeight.ExtraBold,
                                     style = MaterialTheme.typography.titleMedium
@@ -228,10 +216,7 @@ fun LoginScreen(
                         }
                     }
                 }
-
-                Spacer(modifier = Modifier.height(70.dp))
             }
-
 
             Text(
                 text = stringResource(id = R.string.copyright),
@@ -246,24 +231,28 @@ fun LoginScreen(
             )
 
             SnackbarHost(
-                hostState = snackbarHostState, modifier = Modifier.align(Alignment.BottomCenter)
+                hostState = snackbarHostState,
+                modifier = Modifier.align(Alignment.BottomCenter)
             )
         }
     }
 
-    LaunchedEffect(coroutineScope) {
+    LaunchedEffect(Unit) {
         visibleAnimationEnterScreen = true
+        delay(2000)
+        elevationButton = 8.dp
     }
 
-    LaunchedEffect(key1 = authState) {
-
+    LaunchedEffect(authState) {
         when (authState) {
-            is AuthState.Authenticated -> {
-                navToMainScreen()
-            }
+            is AuthState.Authenticated -> navToMainScreen()
 
             is AuthState.Error -> {
-                authState.exception?.localizedMessage?.let { snackbarHostState.showSnackbar(it) }
+                authState.exception?.localizedMessage?.let {
+                    snackbarHostState.showSnackbar(
+                        it
+                    )
+                }
             }
 
             else -> {}
