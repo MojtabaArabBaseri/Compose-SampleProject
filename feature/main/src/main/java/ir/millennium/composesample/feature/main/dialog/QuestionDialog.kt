@@ -29,6 +29,7 @@ import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.White
 import ir.millennium.composesample.feature.main.R
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,18 +45,14 @@ fun QuestionDialog(
     BasicAlertDialog(
         onDismissRequest = {
             statusDialog.value = false
-        },
-        modifier = Modifier
-            .fillMaxWidth()
+        }, modifier = Modifier.fillMaxWidth()
     ) {
         Card(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background)
         ) {
             ConstraintLayout(
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             ) {
 
                 val (imageTitleRef, titleTextRef, messageRef, yesButtonRef, noButtonRef) = createRefs()
@@ -94,22 +91,21 @@ fun QuestionDialog(
                     .padding(top = 16.dp, start = 16.dp, end = 16.dp),
                     text = message,
                     style = MaterialTheme.typography.bodyMedium,
-                    color = LocalCustomColorsPalette.current.textColorPrimary
-                )
+                    color = LocalCustomColorsPalette.current.textColorPrimary)
 
                 Button(onClick = {
                     statusDialog.value = false
                     onClickYes()
-                }, modifier = Modifier
-                    .constrainAs(yesButtonRef) {
-                        top.linkTo(messageRef.bottom)
-                        end.linkTo(parent.end)
-                    }
-                    .padding(top = 74.dp, end = 16.dp, bottom = 24.dp)
-                    .defaultMinSize(minWidth = 90.dp),
+                },
+                    modifier = Modifier
+                        .constrainAs(yesButtonRef) {
+                            top.linkTo(messageRef.bottom)
+                            end.linkTo(parent.end)
+                        }
+                        .padding(top = 74.dp, end = 16.dp, bottom = 24.dp)
+                        .defaultMinSize(minWidth = 90.dp),
                     shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_radius_button)),
-                    colors = ButtonDefaults.buttonColors(containerColor = Green)
-                ) {
+                    colors = ButtonDefaults.buttonColors(containerColor = Green)) {
                     Text(
                         text = labelYesButton,
                         fontWeight = FontWeight.Bold,
@@ -120,16 +116,17 @@ fun QuestionDialog(
 
                 OutlinedButton(onClick = {
                     statusDialog.value = false
-                }, modifier = Modifier
-                    .constrainAs(noButtonRef) {
-                        top.linkTo(messageRef.bottom)
-                        end.linkTo(yesButtonRef.start)
-                    }
-                    .padding(top = 74.dp, end = 12.dp, bottom = 24.dp)
-                    .defaultMinSize(minWidth = 90.dp),
+                    onClickNo()
+                },
+                    modifier = Modifier
+                        .constrainAs(noButtonRef) {
+                            top.linkTo(messageRef.bottom)
+                            end.linkTo(yesButtonRef.start)
+                        }
+                        .padding(top = 74.dp, end = 12.dp, bottom = 24.dp)
+                        .defaultMinSize(minWidth = 90.dp),
                     border = BorderStroke(0.dp, Color.Transparent),
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_radius_button))
-                ) {
+                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_radius_button))) {
                     Text(
                         text = labelNoButton,
                         fontWeight = FontWeight.Bold,
@@ -137,7 +134,6 @@ fun QuestionDialog(
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
-
             }
         }
     }

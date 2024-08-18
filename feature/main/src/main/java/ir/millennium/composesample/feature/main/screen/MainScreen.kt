@@ -56,6 +56,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.Red
 import ir.millennium.composesample.core.designsystem.utils.CustomSnackBar
@@ -67,7 +68,6 @@ import ir.millennium.composesample.feature.main.R
 import ir.millennium.composesample.feature.main.dialog.QuestionDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnrememberedMutableState")
@@ -79,15 +79,19 @@ fun MainScreen(
     viewModel: MainScreenViewModel
 ) {
 
-    val snackbarStatus = rememberSaveable { mutableStateOf(false) }
-
     val context = LocalContext.current
 
     val isShowChangeLanguageDialog = rememberSaveable { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
 
+    val snackbarStatus = rememberSaveable { mutableStateOf(false) }
+
     val snackbarHostState = remember { SnackbarHostState() }
+
+    val stateLanguage = viewModel.stateLanguage.collectAsStateWithLifecycle()
+
+    val stateTheme = viewModel.stateTheme.collectAsStateWithLifecycle()
 
     val items = listOf(
         NavItemState(
@@ -210,12 +214,10 @@ fun MainScreen(
                 },
                 actions = {
                     IconButton(onClick = {
-                        coroutineScope.launch {
-                            if (viewModel.userPreferencesRepository.statusTheme.first() == TypeTheme.DARK.typeTheme) {
-                                viewModel.userPreferencesRepository.setStatusTheme(TypeTheme.LIGHT.typeTheme)
-                            } else {
-                                viewModel.userPreferencesRepository.setStatusTheme(TypeTheme.DARK.typeTheme)
-                            }
+                        if (stateTheme.value == TypeTheme.DARK.typeTheme) {
+                            viewModel.setStatusTheme(TypeTheme.LIGHT.typeTheme)
+                        } else {
+                            viewModel.setStatusTheme(TypeTheme.DARK.typeTheme)
                         }
                     }) {
                         Icon(
@@ -246,19 +248,18 @@ fun MainScreen(
             message = stringResource(id = R.string.message_change_language),
             statusDialog = isShowChangeLanguageDialog,
             onClickYes = {
+                if (stateLanguage.value == TypeLanguage.ENGLISH.typeLanguage) {
+                    viewModel.setLanguageApp(TypeLanguage.PERSIAN.typeLanguage)
+                } else {
+                    viewModel.setLanguageApp(TypeLanguage.ENGLISH.typeLanguage)
+                }
                 coroutineScope.launch {
                     delay(50)
-                    if (viewModel.userPreferencesRepository.languageApp.first() == TypeLanguage.ENGLISH.typeLanguage) {
-                        viewModel.userPreferencesRepository.setLanguageApp(TypeLanguage.PERSIAN.typeLanguage)
-                    } else {
-                        viewModel.userPreferencesRepository.setLanguageApp(TypeLanguage.ENGLISH.typeLanguage)
-                    }
                     (context as? Activity)?.recreate()
                 }
             }
         )
     }
-
 
     BackHandler {
         whenUserWantToExitApp(
