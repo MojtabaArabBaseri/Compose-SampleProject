@@ -19,6 +19,8 @@ const val Main_SCREEN_ROUTE = "MainScreen"
 fun NavGraphBuilder.mainScreen(
     navToAboutMeScreen: @Composable () -> Unit,
     navToArticlesScreen: @Composable (snackbarHostState: SnackbarHostState) -> Unit,
+    navToSplashScreen: () -> Unit,
+    navToSettingsScreen: () -> Unit,
     enterTransient: () -> EnterTransition = {
         fadeIn(tween(500))
 //        slideInHorizontally(
@@ -35,10 +37,15 @@ fun NavGraphBuilder.mainScreen(
 
     composable(route = Main_SCREEN_ROUTE,
         enterTransition = { enterTransient() },
-        exitTransition = { exitTransient() }
-    ) {
+        exitTransition = { exitTransient() }) {
         val viewModel = hiltViewModel<MainScreenViewModel>(it)
-        MainScreen(navToAboutMeScreen, navToArticlesScreen, viewModel)
+        MainScreen(
+            navToAboutMeScreen,
+            navToArticlesScreen,
+            navToSplashScreen,
+            navToSettingsScreen,
+            viewModel
+        )
     }
 }
 

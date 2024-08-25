@@ -58,10 +58,7 @@ fun rowArticle(
                 val (imageRef, titleRef, descriptionRef, dateRef) = createRefs()
 
                 AsyncImage(
-                    model = ImageRequest.Builder(context)
-                        .data(articleItem.urlToImage)
-                        .crossfade(true)
-                        .build(),
+                    model = articleItem.urlToImage,
                     contentDescription = null,
                     modifier = Modifier
                         .constrainAs(imageRef) {

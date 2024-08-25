@@ -23,28 +23,28 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.White
 import ir.millennium.composesample.feature.main.R
-import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuestionDialog(
     title: String = stringResource(id = R.string.attention),
-    message: String,
+    message: String = "ad",
     labelYesButton: String = stringResource(id = R.string.yes),
     labelNoButton: String = stringResource(id = R.string.no),
-    statusDialog: MutableState<Boolean>,
+    stateDialog: MutableState<Boolean>,
     onClickYes: () -> Unit = {},
     onClickNo: () -> Unit = {}
 ) {
     BasicAlertDialog(
         onDismissRequest = {
-            statusDialog.value = false
+            stateDialog.value = false
         }, modifier = Modifier.fillMaxWidth()
     ) {
         Card(
@@ -94,7 +94,7 @@ fun QuestionDialog(
                     color = LocalCustomColorsPalette.current.textColorPrimary)
 
                 Button(onClick = {
-                    statusDialog.value = false
+                    stateDialog.value = false
                     onClickYes()
                 },
                     modifier = Modifier
@@ -115,7 +115,7 @@ fun QuestionDialog(
                 }
 
                 OutlinedButton(onClick = {
-                    statusDialog.value = false
+                    stateDialog.value = false
                     onClickNo()
                 },
                     modifier = Modifier

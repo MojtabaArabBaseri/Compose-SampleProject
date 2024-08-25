@@ -28,17 +28,19 @@ fun NavGraphBuilder.splashScreen(
         exitTransition = { exitTransient() }) {
 
         val viewModel = hiltViewModel<SplashScreenViewModel>(it)
-        val authState by viewModel.authState.collectAsStateWithLifecycle()
 
         SplashScreen(
             viewModel = viewModel,
             navToLoginScreen = navToLoginScreen,
-            navToMainScreen = navToMainScreen,
-            authState = authState
+            navToMainScreen = navToMainScreen
         )
     }
 }
 
-fun NavController.navigateToSplashScreen() {
-    navigate(SPLASH_SCREEN_ROUTE)
+fun NavController.navigateToSplashScreen(parentRoute: String) {
+    navigate(SPLASH_SCREEN_ROUTE) {
+        popUpTo(parentRoute) {
+            inclusive = true
+        }
+    }
 }

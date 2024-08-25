@@ -33,7 +33,7 @@ class UserPreferencesRepository @Inject constructor(
     private val settingsDataStore = appContext.dataStore
 
     private object PreferencesKeys {
-        val STATUS_LOGIN_USER = booleanPreferencesKey("status_login_user")
+        val STATUS_LOGIN_USER = booleanPreferencesKey("state_login_user")
         val TYPE_THEME = intPreferencesKey("type_theme")
         val LANGUAGE_APP = stringPreferencesKey("language_app")
         val USER = stringPreferencesKey("user")

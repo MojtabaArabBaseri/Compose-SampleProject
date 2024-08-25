@@ -8,6 +8,7 @@ import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.firebase.authentication.GoogleAuthUiClient
 import ir.millennium.composesample.core.firebase.authentication.SignInResult
 import ir.millennium.composesample.core.model.UserData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,7 +41,7 @@ open class LoginScreenViewModel @Inject constructor(
     }
 
     fun saveDataUser(userData: UserData) {
-        viewModelScope.launch { userPreferencesRepository.setDataUser(userData) }
+        viewModelScope.launch(Dispatchers.IO) { userPreferencesRepository.setDataUser(userData) }
     }
 
     fun resetState() {

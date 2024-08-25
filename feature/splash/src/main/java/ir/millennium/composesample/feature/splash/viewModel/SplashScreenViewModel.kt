@@ -7,6 +7,7 @@ import ir.millennium.composesample.core.datastore.UserPreferencesRepository
 import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.firebase.authentication.GoogleAuthUiClient
 import ir.millennium.composesample.core.model.UserData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,14 +32,14 @@ open class SplashScreenViewModel @Inject constructor(
 
     override fun isUserLogin() {
         val currentUser = googleAuthUiClient.getSignedInUser()
-        if (currentUser != null) {
-            _authState.update { AuthState.Authenticated(currentUser) }
-        } else {
+        currentUser?.let { userData ->
+            _authState.update { AuthState.Authenticated(userData) }
+        } ?: run {
             _authState.update { AuthState.Unauthenticated }
         }
     }
 
     override fun saveUserData(userData: UserData) {
-        viewModelScope.launch { userPreferencesRepository.setDataUser(userData) }
+        viewModelScope.launch(Dispatchers.IO) { userPreferencesRepository.setDataUser(userData) }
     }
 }

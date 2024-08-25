@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
-import ir.millennium.composesample.core.model.entity.TypeLanguage
-import ir.millennium.composesample.core.model.entity.TypeTheme
+import ir.millennium.composesample.core.firebase.authentication.GoogleAuthUiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -14,32 +13,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 open class MainScreenViewModel @Inject constructor(
-    private val userPreferencesRepository: UserPreferencesRepository
+    userPreferencesRepository: UserPreferencesRepository,
+    private val googleAuthUiClient: GoogleAuthUiClient
 ) : ViewModel() {
 
-    private val statusThemeFlow = userPreferencesRepository.statusTheme
-    val stateTheme = statusThemeFlow.stateIn(
+    val stateUserData = userPreferencesRepository.userData.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
-        initialValue = TypeTheme.LIGHT.typeTheme
+        initialValue = null
     )
 
-    private val languageAppFlow = userPreferencesRepository.languageApp
-    val stateLanguage = languageAppFlow.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = TypeLanguage.ENGLISH.typeLanguage
-    )
-
-    fun setStatusTheme(typeTheme: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            userPreferencesRepository.setStatusTheme(typeTheme)
-        }
-    }
-
-    fun setLanguageApp(typeLanguage: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            userPreferencesRepository.setLanguageApp(typeLanguage)
-        }
+    fun signOut() {
+        viewModelScope.launch(Dispatchers.IO) { googleAuthUiClient.signOut() }
     }
 }

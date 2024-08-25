@@ -113,8 +113,7 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
 
                     val (imageRef, titleRef, authorRef, dateRef, descriptionRef) = createRefs()
 
-                    AsyncImage(model = ImageRequest.Builder(context).data(articleItem.urlToImage)
-                        .crossfade(true).build(),
+                    AsyncImage(model = articleItem.urlToImage,
                         contentDescription = null,
                         modifier = Modifier
                             .constrainAs(imageRef) {

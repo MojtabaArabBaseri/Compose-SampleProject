@@ -57,6 +57,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composesample.core.designsystem.theme.Green
+import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
 import ir.millennium.composesample.core.firebase.authentication.AuthState
@@ -155,10 +156,10 @@ fun LoginScreen(
                         .wrapContentSize()
                         .padding(start = 40.dp, end = 40.dp)
                         .animateEnterExit(enter = fadeIn(tween(1000, 1000))),
-                    color = NavyColor,
+                    color = LocalCustomColorsPalette.current.textColorPrimary,
                     textAlign = TextAlign.Center,
                     overflow = TextOverflow.Clip,
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
 

@@ -102,8 +102,9 @@ object NetworkModule {
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(onlineInterceptor)
                 .addInterceptor(offlineInterceptor)
-                .connectTimeout(45, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(45, TimeUnit.SECONDS)
+                .writeTimeout(25, TimeUnit.SECONDS)
                 .sslSocketFactory(sslSocketFactory, trustAllCerts[0] as X509TrustManager)
                 .hostnameVerifier { _, _ -> true }
         } catch (e: Exception) {
@@ -146,8 +147,9 @@ object NetworkModule {
                 .addInterceptor(onlineInterceptor)
                 .cache(cache)
                 .addInterceptor(offlineInterceptor)
-                .connectTimeout(45, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(45, TimeUnit.SECONDS)
+                .writeTimeout(25, TimeUnit.SECONDS)
                 .hostnameVerifier { _, _ -> true }
         } catch (e: Exception) {
             throw RuntimeException(e)

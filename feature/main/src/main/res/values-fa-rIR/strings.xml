@@ -9,6 +9,8 @@
     <string name="no">خیر</string>
     <string name="attention">اخطار</string>
     <string name="message_change_language">آیا می خواهید زبان را به انگلیسی تغییر دهید؟</string>
-
+    <string name="message_exit_app">آیا می خواهید از حساب کاربری خود خارج شوید؟</string>
+    <string name="settings">تنظیمات</string>
+    <string name="exitToApp">خروج از برنامه</string>
 
 </resources>

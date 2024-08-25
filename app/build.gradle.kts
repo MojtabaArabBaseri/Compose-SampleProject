@@ -60,5 +60,6 @@ dependencies {
     implementation(projects.feature.aboutme)
     implementation(projects.feature.articles)
     implementation(projects.feature.detailArticle)
+    implementation(projects.feature.settings)
 
 }
