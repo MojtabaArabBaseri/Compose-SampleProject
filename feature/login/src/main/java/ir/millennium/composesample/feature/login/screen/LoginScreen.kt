@@ -62,7 +62,7 @@ import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
 import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.firebase.authentication.SignInResult
-import ir.millennium.composesample.core.model.entity.TypeTheme
+import ir.millennium.composesample.core.model.TypeTheme
 import ir.millennium.composesample.feature.login.R
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay

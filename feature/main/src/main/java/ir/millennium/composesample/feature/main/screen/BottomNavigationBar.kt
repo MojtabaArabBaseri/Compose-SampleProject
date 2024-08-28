@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.Red
-import ir.millennium.composesample.core.model.entity.BottomNavItemState
+import ir.millennium.composesample.core.model.BottomNavItemState
 
 @Composable
 fun BottomNavigationBar(items: List<BottomNavItemState>, bottomNavState: MutableIntState) {

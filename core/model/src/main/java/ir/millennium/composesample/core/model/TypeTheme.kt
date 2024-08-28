@@ -1,4 +1,4 @@
-package ir.millennium.composesample.core.model.entity
+package ir.millennium.composesample.core.model
 
 enum class TypeTheme(val typeTheme: Int) {
 

@@ -47,6 +47,7 @@ class GoogleAuthUiClient @Inject constructor(
             .setAutoSelectEnabled(true)
             .build()
     }
+
     suspend fun signInWithIntent(intent: Intent): SignInResult {
         val credential = oneTapClient.getSignInCredentialFromIntent(intent)
         val googleIdToken = credential.googleIdToken

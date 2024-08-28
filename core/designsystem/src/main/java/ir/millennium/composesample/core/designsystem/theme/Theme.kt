@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ir.millennium.composesample.core.model.entity.TypeLanguage
-import ir.millennium.composesample.core.model.entity.TypeTheme
+import ir.millennium.composesample.core.model.TypeLanguage
+import ir.millennium.composesample.core.model.TypeTheme
 
 private val DarkColorPalette = darkColorScheme(
     primary = Blue,

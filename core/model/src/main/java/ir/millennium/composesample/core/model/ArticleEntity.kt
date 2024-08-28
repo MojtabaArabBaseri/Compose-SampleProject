@@ -1,4 +1,4 @@
-package ir.millennium.composesample.core.database.model
+package ir.millennium.composesample.core.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

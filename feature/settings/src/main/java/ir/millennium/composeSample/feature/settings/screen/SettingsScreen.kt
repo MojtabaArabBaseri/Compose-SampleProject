@@ -34,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composeSample.feature.settings.R
 import ir.millennium.composesample.core.designsystem.components.NormalTopAppBar
@@ -45,8 +44,8 @@ import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPale
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
 import ir.millennium.composesample.core.model.LanguageModel
-import ir.millennium.composesample.core.model.entity.TypeLanguage
-import ir.millennium.composesample.core.model.entity.TypeTheme
+import ir.millennium.composesample.core.model.TypeLanguage
+import ir.millennium.composesample.core.model.TypeTheme
 
 @Composable
 fun SettingsScreen(viewModel: SettingsScreenViewModel, onBackPressed: () -> Unit) {

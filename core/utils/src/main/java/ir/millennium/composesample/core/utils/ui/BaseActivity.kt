@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
-import ir.millennium.composesample.core.model.entity.TypeLanguage
+import ir.millennium.composesample.core.model.TypeLanguage
 import ir.millennium.composesample.core.utils.utils.AuxiliaryFunctionsManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch

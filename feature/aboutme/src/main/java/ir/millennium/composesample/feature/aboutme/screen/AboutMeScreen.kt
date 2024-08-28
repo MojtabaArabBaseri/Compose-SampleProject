@@ -47,7 +47,7 @@ import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
-import ir.millennium.composesample.core.model.entity.TypeLanguage
+import ir.millennium.composesample.core.model.TypeLanguage
 import ir.millennium.composesample.feature.aboutme.Constants.USER_PROFILE_DATA
 import ir.millennium.composesample.feature.aboutme.R
 import ir.millennium.composesample.feature.aboutme.dialogs.AboutMeDialog

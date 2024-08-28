@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composesample.core.firebase.authentication.AuthState
-import ir.millennium.composesample.core.model.entity.TypeTheme
+import ir.millennium.composesample.core.model.TypeTheme
 import ir.millennium.composesample.feature.splash.Constants
 import ir.millennium.composesample.feature.splash.R
 import ir.millennium.composesample.feature.splash.viewModel.FakeSplashScreenViewModel
@@ -42,6 +42,7 @@ fun SplashScreen(
     navToLoginScreen: () -> Unit,
     navToMainScreen: () -> Unit
 ) {
+
 
     val authState by viewModel.authState.collectAsStateWithLifecycle()
 

@@ -46,7 +46,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.utils.CustomSnackBar
-import ir.millennium.composesample.core.model.entity.BottomNavItemState
+import ir.millennium.composesample.core.model.BottomNavItemState
 import ir.millennium.composesample.feature.main.Constants.BACK_PRESSED
 import ir.millennium.composesample.feature.main.R
 import ir.millennium.composesample.feature.main.dialog.QuestionDialog

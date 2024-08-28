@@ -26,7 +26,7 @@ fun NavGraphBuilder.settingsScreen(
         enterTransition = { enterTransient() },
         exitTransition = { exitTransient() }) { backstackEntry ->
         val viewModel = hiltViewModel<SettingsScreenViewModel>(backstackEntry)
-        SettingsScreen(viewModel,onBackPressed)
+        SettingsScreen(viewModel, onBackPressed)
     }
 }
 

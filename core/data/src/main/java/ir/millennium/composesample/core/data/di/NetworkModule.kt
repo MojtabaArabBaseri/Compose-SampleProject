@@ -1,30 +1,19 @@
 package ir.millennium.composesample.core.data.di
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ir.millennium.composesample.core.data.repository.RemoteRepositoryImpl
-import ir.millennium.composesample.core.network.dataSource.ApiService
-import ir.millennium.composesample.core.network.di.qualifiers.ApiCaching
-import ir.millennium.composesample.core.network.di.qualifiers.RemoteRepositoryCaching
+import ir.millennium.composesample.core.common.repository.ArticleRepository
+import ir.millennium.composesample.core.data.repository.ArticleRepositoryImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
-
-    // Setup For Non Caching Webservice
-    @Provides
+abstract class NetworkModule {
+    @Binds
     @Singleton
-    fun provideRemoteRepository(apiService: ApiService): RemoteRepositoryImpl =
-        RemoteRepositoryImpl(apiService)
-
-    // Setup For Caching Webservice
-    @Provides
-    @Singleton
-    @RemoteRepositoryCaching
-    fun provideRemoteRepositoryCaching(@ApiCaching apiService: ApiService): RemoteRepositoryImpl =
-        RemoteRepositoryImpl(apiService)
-
+    abstract fun bindsArticleRepository(
+        remoteRepositoryImpl: ArticleRepositoryImpl
+    ): ArticleRepository
 }

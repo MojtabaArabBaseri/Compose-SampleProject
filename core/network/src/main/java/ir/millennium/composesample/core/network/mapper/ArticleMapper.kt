@@ -1,6 +1,6 @@
 package ir.millennium.composesample.core.network.mapper
 
-import ir.millennium.composesample.core.database.model.ArticleEntity
+import ir.millennium.composesample.core.model.ArticleEntity
 import ir.millennium.composesample.core.network.model.ArticleItem
 
 

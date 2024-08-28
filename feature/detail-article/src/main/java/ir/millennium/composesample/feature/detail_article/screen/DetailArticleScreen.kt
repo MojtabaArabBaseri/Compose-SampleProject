@@ -47,7 +47,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import ir.millennium.composesample.core.designsystem.theme.GrayDark
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.network.model.ArticleItem
@@ -73,9 +72,10 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
                 .verticalScroll(scrollSate)
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            TopAppBar(modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
+            TopAppBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
                 windowInsets = WindowInsets(
                     top = 0, bottom = 0
                 ),

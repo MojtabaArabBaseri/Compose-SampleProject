@@ -7,12 +7,11 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.google.firebase.auth.FirebaseUser
 import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
+import ir.millennium.composesample.core.model.TypeLanguage
+import ir.millennium.composesample.core.model.TypeTheme
 import ir.millennium.composesample.core.model.UserData
-import ir.millennium.composesample.core.model.entity.TypeLanguage
-import ir.millennium.composesample.core.model.entity.TypeTheme
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import timber.log.Timber

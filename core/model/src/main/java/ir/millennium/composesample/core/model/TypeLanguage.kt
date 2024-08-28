@@ -1,4 +1,4 @@
-package ir.millennium.composesample.core.model.entity
+package ir.millennium.composesample.core.model
 
 enum class TypeLanguage(val typeLanguage: String) {
     ENGLISH("en"), PERSIAN("fa");

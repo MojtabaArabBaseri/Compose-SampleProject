@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import ir.millennium.composesample.core.database.model.ArticleEntity
+import ir.millennium.composesample.core.model.ArticleEntity
 
 @Dao
 interface ArticleDao {

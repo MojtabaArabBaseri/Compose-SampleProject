@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.google.gson.Gson
 import ir.millennium.composesample.core.designsystem.theme.GrayDark
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette

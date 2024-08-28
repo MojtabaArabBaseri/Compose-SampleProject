@@ -1,4 +1,4 @@
-package ir.millennium.composesample.core.model.entity
+package ir.millennium.composesample.core.model
 
 data class UserProfileEntity(
     val image: Int,

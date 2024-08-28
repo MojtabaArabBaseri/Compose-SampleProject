@@ -12,7 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ir.millennium.composesample.core.database.AppDatabase
-import ir.millennium.composesample.core.database.model.ArticleEntity
+import ir.millennium.composesample.core.model.ArticleEntity
 import ir.millennium.composesample.core.network.Constants
 import ir.millennium.composesample.core.network.Constants.CACHE_NAME
 import ir.millennium.composesample.core.network.Constants.CACHE_SIZE_FOR_RETROFIT
@@ -54,7 +54,7 @@ object NetworkModule {
     @OptIn(ExperimentalPagingApi::class)
     @Provides
     @Singleton
-    fun provideMoviePager(
+    fun provideArticlePager(
         appDatabase: AppDatabase,
         apiService: ApiService
     ): Pager<Int, ArticleEntity> {

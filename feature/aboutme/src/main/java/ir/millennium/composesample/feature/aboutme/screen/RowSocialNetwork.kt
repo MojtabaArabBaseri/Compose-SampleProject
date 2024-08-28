@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
-import ir.millennium.composesample.core.model.entity.UserProfileSocialNetworkEntity
+import ir.millennium.composesample.core.model.UserProfileSocialNetworkEntity
 import ir.millennium.composesample.feature.aboutme.R
 
 @Composable

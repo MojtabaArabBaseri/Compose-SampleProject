@@ -1,4 +1,4 @@
-package ir.millennium.composesample.core.model.entity
+package ir.millennium.composesample.core.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

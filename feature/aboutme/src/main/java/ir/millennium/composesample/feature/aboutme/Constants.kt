@@ -1,7 +1,7 @@
 package ir.millennium.composesample.feature.aboutme
 
-import ir.millennium.composesample.core.model.entity.UserProfileEntity
-import ir.millennium.composesample.core.model.entity.UserProfileSocialNetworkEntity
+import ir.millennium.composesample.core.model.UserProfileEntity
+import ir.millennium.composesample.core.model.UserProfileSocialNetworkEntity
 
 object Constants {
 

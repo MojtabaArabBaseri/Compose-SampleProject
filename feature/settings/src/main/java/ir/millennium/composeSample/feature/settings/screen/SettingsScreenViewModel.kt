@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
-import ir.millennium.composesample.core.model.entity.TypeLanguage
-import ir.millennium.composesample.core.model.entity.TypeTheme
+import ir.millennium.composesample.core.model.TypeLanguage
+import ir.millennium.composesample.core.model.TypeTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
