@@ -19,7 +19,7 @@ open class MainActivityViewModel @Inject constructor(
     userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
 
-    private val statusThemeFlow = userPreferencesRepository.statusTheme
+    private val statusThemeFlow = userPreferencesRepository.stateTheme
     val stateTheme = statusThemeFlow.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
