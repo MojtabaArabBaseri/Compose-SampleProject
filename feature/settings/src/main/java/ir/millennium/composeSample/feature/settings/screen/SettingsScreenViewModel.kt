@@ -17,7 +17,7 @@ open class SettingsScreenViewModel @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
 
-    private val statusThemeFlow = userPreferencesRepository.statusTheme
+    private val statusThemeFlow = userPreferencesRepository.stateTheme
     val stateTheme = statusThemeFlow.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,

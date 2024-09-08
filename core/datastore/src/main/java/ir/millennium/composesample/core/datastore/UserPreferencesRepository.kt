@@ -61,7 +61,7 @@ class UserPreferencesRepository @Inject constructor(
         }
     }
 
-    val statusTheme = settingsDataStore.data.catch { exception ->
+    val stateTheme = settingsDataStore.data.catch { exception ->
         if (exception is IOException) {
             Timber.tag(TAG).e(exception, "Error reading preferences.")
             emit(emptyPreferences())
