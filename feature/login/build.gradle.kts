@@ -9,5 +9,6 @@ android {
 dependencies {
 
     implementation(projects.core.firebase)
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
 }
