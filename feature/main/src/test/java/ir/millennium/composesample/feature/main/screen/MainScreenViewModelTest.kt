@@ -59,8 +59,7 @@ class MainScreenViewModelTest {
     fun `stateUserData is initialized correctly`() = runTest {
         val expectedUserData = UserData("id", "username", "email")
         testStateUserData.value = expectedUserData
-//        whenever(mockUserPreferencesRepository.userData).thenReturn(testStateUserData)
-        val viewModel = MainScreenViewModel(mockUserPreferencesRepository, mockGoogleAuthUiClient)
+        advanceUntilIdle()
         assertEquals(expectedUserData, viewModel.stateUserData.value)
     }
 

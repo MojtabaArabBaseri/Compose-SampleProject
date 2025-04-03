@@ -17,7 +17,8 @@ open class MainScreenViewModel @Inject constructor(
     private val googleAuthUiClient: GoogleAuthUiClient
 ) : ViewModel() {
 
-    val stateUserData = userPreferencesRepository.userData.stateIn(
+    private val stateUserDataFlow = userPreferencesRepository.userData
+    val stateUserData = stateUserDataFlow.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = null

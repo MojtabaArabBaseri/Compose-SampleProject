@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -33,10 +34,12 @@ class MainActivity : BaseActivity() {
             val navController = rememberNavController()
             val navBackStackEntry by navController.currentBackStackEntryAsState()
 
-            when (navBackStackEntry?.destination?.route) {
-                SPLASH_SCREEN_ROUTE -> mainActivityViewModel.onAuthScreen(true)
-                LOGIN_SCREEN_ROUTE -> mainActivityViewModel.onAuthScreen(true)
-                else -> mainActivityViewModel.onAuthScreen(false)
+            LaunchedEffect(navBackStackEntry?.destination?.route) {
+                when (navBackStackEntry?.destination?.route) {
+                    SPLASH_SCREEN_ROUTE -> mainActivityViewModel.onAuthScreen(true)
+                    LOGIN_SCREEN_ROUTE -> mainActivityViewModel.onAuthScreen(true)
+                    else -> mainActivityViewModel.onAuthScreen(false)
+                }
             }
 
             val stateLanguage by mainActivityViewModel.stateLanguage.collectAsStateWithLifecycle()

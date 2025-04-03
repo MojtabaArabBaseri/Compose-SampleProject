@@ -35,7 +35,7 @@ import ir.millennium.composesample.feature.articles.R
 
 
 @Composable
-fun rowArticle(
+fun RowArticle(
     articleItem: ArticleItem,
     navToDetailArticleScreen: (articleItemJson: String) -> Unit
 ) {

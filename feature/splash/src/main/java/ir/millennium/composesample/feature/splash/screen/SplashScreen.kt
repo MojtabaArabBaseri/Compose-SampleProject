@@ -1,5 +1,6 @@
 package ir.millennium.composesample.feature.splash.screen
 
+import android.content.res.Configuration
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.model.TypeTheme
+import ir.millennium.composesample.core.utils.ui.MultiScreenPreview
 import ir.millennium.composesample.feature.splash.Constants
 import ir.millennium.composesample.feature.splash.R
 import ir.millennium.composesample.feature.splash.viewModel.FakeSplashScreenViewModel
@@ -38,9 +40,7 @@ import kotlin.math.roundToInt
 
 @Composable
 fun SplashScreen(
-    viewModel: ISplashScreenViewModel,
-    navToLoginScreen: () -> Unit,
-    navToMainScreen: () -> Unit
+    viewModel: ISplashScreenViewModel, navToLoginScreen: () -> Unit, navToMainScreen: () -> Unit
 ) {
 
 
@@ -52,8 +52,7 @@ fun SplashScreen(
 
     val scaleLogo by animateFloatAsState(
         targetValue = if (animatedState) 1f else 0f,
-        animationSpec = tween(
-            durationMillis = 1000,
+        animationSpec = tween(durationMillis = 1000,
             easing = { OvershootInterpolator(1.4f).getInterpolation(it) }),
         label = "scale animation on logo"
     )
@@ -109,15 +108,7 @@ fun SplashScreen(
     }
 }
 
-/* for landscape mode
-@Preview(
-    device = "spec:width=720dp,height=360dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape",
-    showSystemUi = true,
-    uiMode = Configuration.ORIENTATION_LANDSCAPE,
-)*/
-@Preview(
-    device = Devices.PHONE, showSystemUi = false
-)
+@MultiScreenPreview
 @Composable
 fun SplashScreenPreview() {
 
@@ -125,9 +116,5 @@ fun SplashScreenPreview() {
         MutableStateFlow(TypeTheme.LIGHT.typeTheme), MutableStateFlow(null)
     )
 
-    SplashScreen(
-        viewModel = viewModel,
-        navToLoginScreen = {},
-        navToMainScreen = {}
-    )
+    SplashScreen(viewModel = viewModel, navToLoginScreen = {}, navToMainScreen = {})
 }

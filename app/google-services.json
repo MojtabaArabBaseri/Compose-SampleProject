@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "206966106304",
     "project_id": "composesample-20d23",
-    "storage_bucket": "composesample-20d23.appspot.com"
+    "storage_bucket": "composesample-20d23.firebasestorage.app"
   },
   "client": [
     {
@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "206966106304-jkujk4pqb3gmpiv44jct9bl3qhf71od0.apps.googleusercontent.com",
+          "client_id": "206966106304-054i0va7f2g5e5b0c0ova56kd83u7rtn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ir.millennium.composesample",
-            "certificate_hash": "6370239b75371f546495afa2df8341a1a748fc2e"
+            "certificate_hash": "dfb69916e884f68caedb6994d1da1c4858540c1d"
           }
         },
         {

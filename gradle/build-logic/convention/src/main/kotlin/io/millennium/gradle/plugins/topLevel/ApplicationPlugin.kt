@@ -17,7 +17,6 @@ class ApplicationPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
                 apply("com.google.gms.google-services")
                 apply("com.google.firebase.crashlytics")
-
                 apply("io.millennium.gradle.android.application.compose")
                 apply("io.millennium.gradle.android.hilt")
 
@@ -25,10 +24,6 @@ class ApplicationPlugin : Plugin<Project> {
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid()
-
-                defaultConfig {
-                    targetSdk = Versions.TARGET_SDK
-                }
             }
 
             dependencies {
@@ -38,6 +33,7 @@ class ApplicationPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("accompanist.systemuicontroller").get())
                 add("implementation", libs.findLibrary("androidx.multidex").get())
                 add("implementation", libs.findLibrary("timber").get())
+                add("implementation", libs.findLibrary("symbol.processing.api").get())
                 //Firebase
                 add("implementation", platform(libs.findLibrary("firebase.bom").get()))
                 add("implementation", libs.findLibrary("firebase.analytics").get())

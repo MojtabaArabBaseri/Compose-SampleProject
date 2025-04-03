@@ -19,7 +19,8 @@ class HiltPlugin : Plugin<Project> {
                 "androidTestImplementation"(libs.findLibrary("hilt.android.testing").get())
                 "ksp"(libs.findLibrary("hilt.android.compiler").get())
                 "ksp"(libs.findLibrary("hilt.compiler").get())
-                "kspAndroidTest"(libs.findLibrary("hilt.android.compiler").get())
+                "ksp"(libs.findLibrary("dagger.compiler").get())
+                "kspAndroidTest"(libs.findLibrary("hilt.android.testing").get())
             }
         }
     }

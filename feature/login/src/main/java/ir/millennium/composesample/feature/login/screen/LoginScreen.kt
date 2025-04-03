@@ -67,8 +67,8 @@ import ir.millennium.composesample.feature.login.R
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LoginScreen(
     viewModel: LoginScreenViewModel, navToMainScreen: () -> Unit, authState: AuthState?
@@ -256,7 +256,9 @@ fun LoginScreen(
                 }
             }
 
-            else -> {}
+            else -> {
+                Timber.log(1, "AuthState is null")
+            }
         }
     }
 }

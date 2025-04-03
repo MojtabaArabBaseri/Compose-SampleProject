@@ -47,6 +47,7 @@ import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPale
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
 import ir.millennium.composesample.core.model.TypeLanguage
+import ir.millennium.composesample.core.utils.ui.MultiScreenPreview
 import ir.millennium.composesample.feature.aboutme.Constants.USER_PROFILE_DATA
 import ir.millennium.composesample.feature.aboutme.R
 import ir.millennium.composesample.feature.aboutme.dialogs.AboutMeDialog
@@ -81,8 +82,7 @@ fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
                 Image(
                     painter = painterResource(id = R.drawable.image_user),
                     contentDescription = null,
-                    modifier = Modifier
-                        .constrainAs(imageRef) {
+                    modifier = Modifier.constrainAs(imageRef) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
                             end.linkTo(parent.end)
@@ -94,8 +94,7 @@ fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
 
                 Text(
                     text = stringResource(id = R.string.full_name),
-                    modifier = Modifier
-                        .constrainAs(textRef) {
+                    modifier = Modifier.constrainAs(textRef) {
                             top.linkTo(imageRef.bottom)
                             bottom.linkTo(imageRef.bottom)
                             start.linkTo(parent.start)
@@ -159,7 +158,7 @@ fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
     }
 }
 
-@Preview
+@MultiScreenPreview
 @Composable
 fun AboutMeScreenPreview() {
     AboutMeScreen(
