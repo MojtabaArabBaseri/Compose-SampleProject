@@ -24,6 +24,7 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 
         setupTimber(isDebuggable, releaseTree)

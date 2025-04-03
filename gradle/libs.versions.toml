@@ -3,35 +3,31 @@ accompanistDrawablepainterVersion = "0.24.11-rc"
 accompanistSwiperefresh = "0.24.11-rc"
 accompanistSystemuicontroller = "0.24.11-rc"
 accompanistNavigationMaterial = "0.24.11-rc"
-activityComposeVersion = "1.9.1"
-agp = "8.4.0"
+activityComposeVersion = "1.9.3"
+agp = "8.7.3"
 composeVersion = "2.0.0"
 appcompatResources = "1.7.0"
 appcompatVersion = "1.7.0"
 calligraphy3Version = "3.1.1"
 coilComposeVersion = "2.1.0"
 commonsCodecVersion = "1.15"
-constraintlayoutCompose = "1.1.0-alpha13"
+constraintlayoutCompose = "1.1.0"
 coroutinesVersion = "1.7.3"
 datastorePreferencesVersion = "1.1.1"
 desugar_jdk_libsVersion = "2.1.1"
 essentialsVersion = "3.0.0-RC1"
-fragmentKtxVersion = "1.8.2"
-hiltAndroidTestingVersion = "2.51.1"
-hiltAndroidVersion = "2.48"
-hiltCompilerVersion = "2.48"
-hiltNavigationComposeVersion = "1.2.0"
+fragmentKtxVersion = "1.8.5"
 javaCommonVersion = "2.3.1"
-kotlin = "1.9.22"
-coreKtx = "1.13.1"
+kotlin = "2.1.0"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 mockitoVersion = "5.4.0"
 mockitoKotlinVersion = "5.1.0"
 kotlinxCoroutinesTestVersion = "1.7.3"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-kotlinBom = "1.9.20"
-kotlinStdlibJdk7Version = "1.9.20"
+kotlinBom = "1.9.24"
+kotlinStdlibJdk7Version = "2.0.0"
 legacySupportV4Version = "1.0.0"
 libraryVersion = "2.4.0"
 lifecycleRuntimeKtx = "2.8.4"
@@ -49,16 +45,18 @@ pagingComposeVersion = "3.3.2"
 pagingRuntimeKtxVersion = "3.3.2"
 playServicesTfliteAccelerationService = "16.0.0-beta01"
 retrofitVersion = "2.9.0"
+#roomVersion = "2.7.0-alpha11"
 roomVersion = "2.6.1"
 runtimeLivedataVersion = "1.6.8"
 timberVersion = "5.0.1"
 viewpumpVersion = "2.0.3"
-hilt = "2.48.1"
+hilt = "2.53"
+hiltNavigationComposeVersion = "1.2.0"
 windowVersion = "1.3.0"
 materialVersion = "1.12.0"
 uiAndroidVersion = "1.6.8"
 material3Version = "1.2.1"
-ksp = "2.0.0-1.0.21"
+ksp = "2.1.0-1.0.29"
 firebaseBomVersion = "33.2.0"
 firebaseVersion = "4.4.2"
 firebaseMessagingKtxVersion = "24.0.1"
@@ -66,12 +64,13 @@ firebaseCrashlyticsVersion = "3.0.2"
 playServicesAuth = "21.2.0"
 lifecycleRuntimeComposeAndroidVersion = "2.8.4"
 mockkVersion = "1.12.0"
+coreKtxVersion = "1.6.1"
+junitKtxVersion = "1.2.1"
 
 [libraries]
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanistNavigationMaterial" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
-androidx-activity-compose-v172 = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 androidx-appcompat-resources = { module = "androidx.appcompat:appcompat-resources", version.ref = "appcompatResources" }
 androidx-compose-ui-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
@@ -79,7 +78,6 @@ androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constr
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesVersion" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtxVersion" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 androidx-legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacySupportV4Version" }
 androidx-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycleVersion" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleVersion" }
@@ -95,10 +93,12 @@ androidx-navigation-testing = { module = "androidx.navigation:navigation-testing
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navVersion" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingComposeVersion" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtxVersion" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
+paging-common = { module = "androidx.paging:paging-common", version.ref = "pagingRuntimeKtxVersion" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomVersion" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomVersion" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 androidx-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedataVersion" }
 androidx-window = { module = "androidx.window:window", version.ref = "windowVersion" }
 calligraphy3 = { module = "io.github.inflationx:calligraphy3", version.ref = "calligraphy3Version" }
@@ -109,10 +109,12 @@ compiler = { module = "android.arch.lifecycle:compiler", version.ref = "lifecycl
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libsVersion" }
 extension = { module = "android.arch.lifecycle:extensions", version.ref = "lifecycleVersion" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hiltAndroidTestingVersion" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompilerVersion" }
-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltCompilerVersion" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "hilt" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 java-common = { module = "de.greenrobot:java-common", version.ref = "javaCommonVersion" }
 essentials = { module = "org.greenrobot:essentials", version.ref = "essentialsVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -154,6 +156,9 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
 mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoVersion" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTestVersion" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlinVersion" }
+core-ktx = { group = "androidx.test", name = "core-ktx", version.ref = "coreKtxVersion" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtxVersion" }
+symbol-processing-api = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }

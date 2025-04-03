@@ -10,8 +10,8 @@ class FeaturePlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply {
                 apply("io.millennium.gradle.android.library")
-                apply("io.millennium.gradle.android.hilt")
                 apply("io.millennium.gradle.android.library.compose")
+                apply("io.millennium.gradle.android.hilt")
                 apply("kotlin-parcelize")
             }
 
@@ -20,6 +20,7 @@ class FeaturePlugin : Plugin<Project> {
                 add("implementation", project(":core:model"))
                 add("implementation", project(":core:designsystem"))
                 add("implementation", project(":core:datastore"))
+                add("implementation", project(":core:utils"))
                 //LoadImage
                 add("implementation", libs.findLibrary("coil-compose").get())
                 //Ui

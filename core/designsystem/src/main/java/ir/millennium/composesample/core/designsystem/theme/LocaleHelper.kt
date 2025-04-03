@@ -21,10 +21,13 @@ object LocaleHelper {
     private fun updateResourcesLegacy(context: Context, language: String): Context {
         val locale = Locale(language)
         Locale.setDefault(locale)
-        val resources = context.resources
-        val configuration = resources.configuration
-        configuration.locale = locale
-        resources.updateConfiguration(configuration, resources.displayMetrics)
-        return context
+
+        val configuration = context.resources.configuration.apply {
+            setLocale(locale)
+            setLayoutDirection(locale)
+        }
+
+        return context.createConfigurationContext(configuration)
     }
+
 }

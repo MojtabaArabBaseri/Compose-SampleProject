@@ -12,4 +12,3 @@ plugins {
     alias(libs.plugins.firebase) apply false
     alias(libs.plugins.crashlytics) apply false
 }
-

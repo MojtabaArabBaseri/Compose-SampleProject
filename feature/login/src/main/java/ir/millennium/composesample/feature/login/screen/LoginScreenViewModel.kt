@@ -14,11 +14,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,8 +25,8 @@ open class LoginScreenViewModel @Inject constructor(
     val googleAuthUiClient: GoogleAuthUiClient
 ) : ViewModel() {
 
-    private val statusThemeFlow = userPreferencesRepository.stateTheme
-    val typeTheme = statusThemeFlow.stateIn(
+    private val stateThemeFlow = userPreferencesRepository.stateTheme
+    val typeTheme = stateThemeFlow.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = TypeTheme.LIGHT.typeTheme

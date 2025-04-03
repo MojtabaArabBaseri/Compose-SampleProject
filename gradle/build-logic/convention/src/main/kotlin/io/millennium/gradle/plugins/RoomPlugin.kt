@@ -12,8 +12,8 @@ class RoomPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("androidx.room")
             pluginManager.apply("com.google.devtools.ksp")
+            pluginManager.apply("androidx.room")
 
             extensions.configure<KspExtension> {
                 arg("room.generateKotlin", "true")
@@ -27,6 +27,7 @@ class RoomPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.room.runtime").get())
                 add("implementation", libs.findLibrary("androidx.room.ktx").get())
                 add("implementation", libs.findLibrary("androidx.room.paging").get())
+                add("androidTestImplementation", libs.findLibrary("androidx.room.testing").get())
                 add("ksp", libs.findLibrary("androidx.room.compiler").get())
             }
         }

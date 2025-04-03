@@ -1,3 +1,4 @@
+import androidx.room.gradle.RoomExtension
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -14,6 +15,7 @@ android {
         versionName = "1.0"
 
         multiDexEnabled = true
+
     }
 
     signingConfigs {
@@ -39,6 +41,7 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"

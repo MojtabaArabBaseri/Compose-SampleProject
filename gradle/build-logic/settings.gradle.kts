@@ -1,5 +1,6 @@
 dependencyResolutionManagement {
     repositories {
+        maven ("https://maven.myket.ir")
         google()
         mavenCentral()
         gradlePluginPortal()

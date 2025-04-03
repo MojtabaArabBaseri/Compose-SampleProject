@@ -7,7 +7,6 @@ android {
 }
 
 dependencies {
-
     api(projects.core.utils)
     api(projects.core.model)
     api(projects.core.database)

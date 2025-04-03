@@ -81,7 +81,7 @@ fun ArticleScreen(
                     state = articleScreenViewModel.stateLazyColumn,
                 ) {
                     items(articleList.itemCount) { index ->
-                        rowArticle(
+                        RowArticle(
                             articleList[index]!!,
                             navToDetailArticleScreen = { articleItemJson ->
                                 navToDetailArticleScreen(articleItemJson)

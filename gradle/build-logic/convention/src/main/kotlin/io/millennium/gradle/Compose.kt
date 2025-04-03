@@ -24,7 +24,10 @@ internal fun Project.configureAndroidCompose(
             add("implementation", libs.findLibrary("androidx.activity.compose").get())
             //Lifecycle
             add("implementation", libs.findLibrary("androidx.lifecycle.viewmodel.compose").get())
-            add("implementation", libs.findLibrary("androidx.lifecycle.runtime.compose.android").get())
+            add(
+                "implementation",
+                libs.findLibrary("androidx.lifecycle.runtime.compose.android").get()
+            )
             //Ui
             add("implementation", libs.findLibrary("androidx.compose.ui.ui.tooling").get())
             //Navigation
