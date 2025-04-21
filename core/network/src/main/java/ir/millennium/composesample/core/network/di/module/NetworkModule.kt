@@ -188,7 +188,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideOfflineIntercepter(
+    fun provideOfflineInterceptor(
         @ApplicationContext context: Context,
         auxiliaryFunctionsManager: AuxiliaryFunctionsManager
     ): Interceptor = Interceptor { chain ->
@@ -213,6 +213,7 @@ object NetworkModule {
     fun provideGson(): Gson = GsonBuilder().serializeNulls().create()
 
     private fun createCacheHeader(maxAge: Int): String = "public, max-age=$maxAge"
+
     private fun createStaleCacheHeader(maxStale: Int): String =
         "public, only-if-cached, max-stale=$maxStale"
 

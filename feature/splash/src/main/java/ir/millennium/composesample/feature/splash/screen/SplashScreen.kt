@@ -1,6 +1,5 @@
 package ir.millennium.composesample.feature.splash.screen
 
-import android.content.res.Configuration
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -22,8 +21,6 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -52,7 +49,8 @@ fun SplashScreen(
 
     val scaleLogo by animateFloatAsState(
         targetValue = if (animatedState) 1f else 0f,
-        animationSpec = tween(durationMillis = 1000,
+        animationSpec = tween(
+            durationMillis = 1000,
             easing = { OvershootInterpolator(1.4f).getInterpolation(it) }),
         label = "scale animation on logo"
     )
@@ -72,13 +70,14 @@ fun SplashScreen(
                 contentScale = ContentScale.FillBounds
             ), contentAlignment = Alignment.Center
     ) {
-        Image(painter = painterResource(
-            id = if (stateTheme == TypeTheme.DARK.typeTheme) {
-                R.drawable.ic_logo_complete_light
-            } else {
-                R.drawable.ic_logo_complete_dark
-            }
-        ),
+        Image(
+            painter = painterResource(
+                id = if (stateTheme == TypeTheme.DARK.typeTheme) {
+                    R.drawable.ic_logo_complete_light
+                } else {
+                    R.drawable.ic_logo_complete_dark
+                }
+            ),
             contentDescription = null,
             modifier = Modifier
                 .size(width = 280.dp, height = 150.dp)

@@ -13,4 +13,4 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(name = "Normal Screen", widthDp = 320, heightDp = 480)
 @Preview(name = "Large Screen", widthDp = 480, heightDp = 800)
 @Preview(name = "XLarge Screen", widthDp = 720, heightDp = 1280)
-annotation class MultiScreenPreview()
+annotation class MultiScreenPreview

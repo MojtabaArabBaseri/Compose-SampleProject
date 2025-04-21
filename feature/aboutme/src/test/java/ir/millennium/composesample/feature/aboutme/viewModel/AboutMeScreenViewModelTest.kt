@@ -1,6 +1,7 @@
 package ir.millennium.composesample.feature.aboutme.viewModel
 
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
+import ir.millennium.composesample.core.designsystem.components.dialogs.factory.IMyDialogFactory
 import ir.millennium.composesample.core.model.TypeLanguage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,7 +21,6 @@ import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.atLeastOnce
 import org.mockito.kotlin.reset
-import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
@@ -31,6 +31,7 @@ class AboutMeScreenViewModelTest {
 
     @Mock
     lateinit var mockUserPreferencesRepository: UserPreferencesRepository
+    lateinit var mockIMyDialogFactory: IMyDialogFactory
 
     private lateinit var viewModel: AboutMeScreenViewModel
 
@@ -41,7 +42,7 @@ class AboutMeScreenViewModelTest {
         Dispatchers.setMain(StandardTestDispatcher())
         MockitoAnnotations.openMocks(this)
         whenever(mockUserPreferencesRepository.languageApp).thenReturn(stateLanguageFlow)
-        viewModel = AboutMeScreenViewModel(mockUserPreferencesRepository)
+        viewModel = AboutMeScreenViewModel(mockUserPreferencesRepository, mockIMyDialogFactory)
     }
 
     @Test
@@ -65,7 +66,7 @@ class AboutMeScreenViewModelTest {
 
     @Test
     fun `verify no extra repository calls are made during initialization`() = runTest {
-        viewModel = AboutMeScreenViewModel(mockUserPreferencesRepository)
+        viewModel = AboutMeScreenViewModel(mockUserPreferencesRepository, mockIMyDialogFactory)
         advanceUntilIdle()
         verify(mockUserPreferencesRepository, atLeastOnce()).languageApp
         verifyNoMoreInteractions(mockUserPreferencesRepository)

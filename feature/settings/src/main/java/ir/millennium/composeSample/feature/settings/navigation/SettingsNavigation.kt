@@ -22,7 +22,8 @@ fun NavGraphBuilder.settingsScreen(
     }
 ) {
 
-    composable(route = SETTINGS_SCREEN_ROUTE,
+    composable(
+        route = SETTINGS_SCREEN_ROUTE,
         enterTransition = { enterTransient() },
         exitTransition = { exitTransient() }) { backstackEntry ->
         val viewModel = hiltViewModel<SettingsScreenViewModel>(backstackEntry)

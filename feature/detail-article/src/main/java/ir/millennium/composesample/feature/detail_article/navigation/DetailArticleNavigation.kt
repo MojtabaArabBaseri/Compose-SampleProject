@@ -24,7 +24,8 @@ fun NavGraphBuilder.detailArticleScreen(
     }
 ) {
 
-    composable(route = "$DETAIL_ARTICLE_SCREEN_ROUTE/{detail-article-Item}",
+    composable(
+        route = "$DETAIL_ARTICLE_SCREEN_ROUTE/{detail-article-Item}",
         arguments = listOf(
             navArgument("detail-article-Item") {
                 type = NavType.StringType

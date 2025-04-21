@@ -14,7 +14,6 @@ import ir.millennium.composesample.core.model.TypeTheme
 import ir.millennium.composesample.core.model.UserData
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
