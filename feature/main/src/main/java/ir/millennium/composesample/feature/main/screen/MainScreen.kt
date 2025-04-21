@@ -44,12 +44,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import ir.millennium.composesample.core.designsystem.components.dialogs.config.MyDialogConfig
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.utils.CustomSnackBar
 import ir.millennium.composesample.core.model.BottomNavItemState
 import ir.millennium.composesample.feature.main.Constants.BACK_PRESSED
 import ir.millennium.composesample.feature.main.R
-import ir.millennium.composesample.feature.main.dialog.QuestionDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -114,15 +114,13 @@ fun MainScreen(
             ) {
 
                 AnimatedContent(
-                    targetState = bottomNavState,
-                    transitionSpec = {
-                        slideInHorizontally(animationSpec = tween(250),
+                    targetState = bottomNavState, transitionSpec = {
+                        slideInHorizontally(
+                            animationSpec = tween(250),
                             initialOffsetX = { if (bottomNavState.intValue == 0) it else -it }) togetherWith slideOutHorizontally(
                             animationSpec = tween(250),
                             targetOffsetX = { if (bottomNavState.intValue == 0) -it else it })
-                    },
-                    modifier = Modifier.fillMaxSize(),
-                    label = ""
+                    }, modifier = Modifier.fillMaxSize(), label = ""
                 ) { bottomNavState ->
                     if (bottomNavState.intValue == 0) {
                         navToAboutMeScreen()
@@ -132,16 +130,14 @@ fun MainScreen(
                 }
 
                 CenterAlignedTopAppBar(
-                    windowInsets = WindowInsets(top = 0, bottom = 0),
-                    title = {
+                    windowInsets = WindowInsets(top = 0, bottom = 0), title = {
                         Text(
                             text = stringResource(id = R.string.title_application),
                             color = LocalCustomColorsPalette.current.textColorPrimary,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleLarge
                         )
-                    },
-                    navigationIcon = {
+                    }, navigationIcon = {
                         IconButton(onClick = {
                             coroutineScope.launch { drawerState.open() }
                         }) {
@@ -151,8 +147,7 @@ fun MainScreen(
                                 tint = LocalCustomColorsPalette.current.iconColorPrimary
                             )
                         }
-                    },
-                    colors = TopAppBarDefaults.topAppBarColors(
+                    }, colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = LocalCustomColorsPalette.current.toolbarColor
                     )
                 )
@@ -171,14 +166,17 @@ fun MainScreen(
     }
 
     if (isShowExitAppDialog.value) {
-        QuestionDialog(
+        val dialogConfig = MyDialogConfig.MyDialogQuestionConfig(
+            title = stringResource(id = R.string.attention),
             message = stringResource(id = R.string.message_exit_app),
+            labelYesButton = stringResource(id = R.string.yes),
+            labelNoButton = stringResource(id = R.string.no),
             stateDialog = isShowExitAppDialog,
             onClickYes = {
                 viewModel.signOut()
                 navToSplashScreen()
-            }
-        )
+            })
+        viewModel.myDialogFactory.createDialog(dialogConfig).Render()
     }
 
     BackHandler {

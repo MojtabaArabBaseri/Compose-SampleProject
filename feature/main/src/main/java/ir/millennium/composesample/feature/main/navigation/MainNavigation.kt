@@ -35,7 +35,8 @@ fun NavGraphBuilder.mainScreen(
     }
 ) {
 
-    composable(route = Main_SCREEN_ROUTE,
+    composable(
+        route = Main_SCREEN_ROUTE,
         enterTransition = { enterTransient() },
         exitTransition = { exitTransient() }) {
         val viewModel = hiltViewModel<MainScreenViewModel>(it)

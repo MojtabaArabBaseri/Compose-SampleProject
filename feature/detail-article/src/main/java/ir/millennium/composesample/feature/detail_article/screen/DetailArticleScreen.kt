@@ -113,7 +113,8 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
 
                     val (imageRef, titleRef, authorRef, dateRef, descriptionRef) = createRefs()
 
-                    AsyncImage(model = articleItem.urlToImage,
+                    AsyncImage(
+                        model = articleItem.urlToImage,
                         contentDescription = null,
                         modifier = Modifier
                             .constrainAs(imageRef) {
@@ -135,7 +136,8 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
                         contentScale = ContentScale.Crop)
 
                     articleItem.title?.let {
-                        Text(text = it,
+                        Text(
+                            text = it,
                             modifier = Modifier
                                 .constrainAs(titleRef) {
                                     top.linkTo(imageRef.bottom)
@@ -149,7 +151,8 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
                     }
 
                     articleItem.author?.let {
-                        Text(text = it,
+                        Text(
+                            text = it,
                             modifier = Modifier
                                 .constrainAs(authorRef) {
                                     top.linkTo(titleRef.bottom)
@@ -164,7 +167,8 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
                     }
 
                     articleItem.publishedAt?.let {
-                        Text(text = it,
+                        Text(
+                            text = it,
                             modifier = Modifier
                                 .constrainAs(dateRef) {
                                     top.linkTo(titleRef.bottom)
@@ -178,7 +182,8 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
                     }
 
                     articleItem.content?.let {
-                        Text(text = it,
+                        Text(
+                            text = it,
                             modifier = Modifier
                                 .constrainAs(descriptionRef) {
                                     top.linkTo(authorRef.bottom)

@@ -21,7 +21,8 @@ fun NavGraphBuilder.splashScreen(
     exitTransient: () -> ExitTransition = { slideOutHorizontally(animationSpec = tween(500)) }
 ) {
 
-    composable(route = SPLASH_SCREEN_ROUTE,
+    composable(
+        route = SPLASH_SCREEN_ROUTE,
         enterTransition = { enterTransient() },
         exitTransition = { exitTransient() }) {
 

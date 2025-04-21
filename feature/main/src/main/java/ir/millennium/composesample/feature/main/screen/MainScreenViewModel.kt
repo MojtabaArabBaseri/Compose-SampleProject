@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
+import ir.millennium.composesample.core.designsystem.components.dialogs.factory.IMyDialogFactory
 import ir.millennium.composesample.core.firebase.authentication.GoogleAuthUiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 open class MainScreenViewModel @Inject constructor(
     userPreferencesRepository: UserPreferencesRepository,
-    private val googleAuthUiClient: GoogleAuthUiClient
+    private val googleAuthUiClient: GoogleAuthUiClient,
+    val myDialogFactory: IMyDialogFactory
 ) : ViewModel() {
 
     private val stateUserDataFlow = userPreferencesRepository.userData

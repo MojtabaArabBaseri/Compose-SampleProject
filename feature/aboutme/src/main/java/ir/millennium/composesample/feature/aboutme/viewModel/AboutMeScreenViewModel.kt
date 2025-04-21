@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.millennium.composesample.core.datastore.UserPreferencesRepository
+import ir.millennium.composesample.core.designsystem.components.dialogs.factory.IMyDialogFactory
 import ir.millennium.composesample.core.model.TypeLanguage
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 open class AboutMeScreenViewModel @Inject constructor(
-    userPreferencesRepository: UserPreferencesRepository
+    userPreferencesRepository: UserPreferencesRepository,
+    override val myDialogFactory: IMyDialogFactory
 ) : ViewModel(), IAboutMeScreenViewModel {
 
     override val stateLazyColumn = LazyListState()

@@ -30,7 +30,8 @@ fun NavGraphBuilder.loginScreen(
     }
 ) {
 
-    composable(route = LOGIN_SCREEN_ROUTE,
+    composable(
+        route = LOGIN_SCREEN_ROUTE,
         enterTransition = { enterTransient() },
         exitTransition = { exitTransient() }
     ) {

@@ -34,13 +34,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import ir.millennium.composesample.core.designsystem.components.dialogs.component.IMyDialogComponent
+import ir.millennium.composesample.core.designsystem.components.dialogs.config.MyDialogConfig
+import ir.millennium.composesample.core.designsystem.components.dialogs.factory.IMyDialogFactory
 import ir.millennium.composesample.core.designsystem.theme.AppFont
 import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
@@ -50,7 +52,6 @@ import ir.millennium.composesample.core.model.TypeLanguage
 import ir.millennium.composesample.core.utils.ui.MultiScreenPreview
 import ir.millennium.composesample.feature.aboutme.Constants.USER_PROFILE_DATA
 import ir.millennium.composesample.feature.aboutme.R
-import ir.millennium.composesample.feature.aboutme.dialogs.AboutMeDialog
 import ir.millennium.composesample.feature.aboutme.viewModel.FakeAboutMeScreenViewModel
 import ir.millennium.composesample.feature.aboutme.viewModel.IAboutMeScreenViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,7 +59,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
+fun AboutMeScreen(
+    viewModel: IAboutMeScreenViewModel
+) {
 
     val modalBottomSheetState = rememberModalBottomSheetState()
     var isSheetOpen by rememberSaveable { mutableStateOf(false) }
@@ -83,25 +86,25 @@ fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
                     painter = painterResource(id = R.drawable.image_user),
                     contentDescription = null,
                     modifier = Modifier.constrainAs(imageRef) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                            width = Dimension.matchParent
-                            height = Dimension.value(300.dp)
-                        },
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        width = Dimension.matchParent
+                        height = Dimension.value(300.dp)
+                    },
                     contentScale = ContentScale.Crop
                 )
 
                 Text(
                     text = stringResource(id = R.string.full_name),
                     modifier = Modifier.constrainAs(textRef) {
-                            top.linkTo(imageRef.bottom)
-                            bottom.linkTo(imageRef.bottom)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                            width = Dimension.wrapContent
-                            height = Dimension.wrapContent
-                        },
+                        top.linkTo(imageRef.bottom)
+                        bottom.linkTo(imageRef.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        width = Dimension.wrapContent
+                        height = Dimension.wrapContent
+                    },
                     style = TextStyle(
                         fontSize = 26.sp,
                         fontFamily = if (languageApp == TypeLanguage.PERSIAN.typeLanguage) AppFont.FontPersian else AppFont.FontEnglish,
@@ -153,7 +156,9 @@ fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
             scrimColor = NavyColor.copy(alpha = 0.2f),
             tonalElevation = 0.dp,
         ) {
-            AboutMeDialog()
+            viewModel.myDialogFactory.createDialog(
+                MyDialogConfig.MyDialogAboutMeConfig(stringResource(R.string.about_me_detail))
+            ).Render()
         }
     }
 }
@@ -163,7 +168,16 @@ fun AboutMeScreen(viewModel: IAboutMeScreenViewModel) {
 fun AboutMeScreenPreview() {
     AboutMeScreen(
         viewModel = FakeAboutMeScreenViewModel(
-            MutableStateFlow(TypeLanguage.PERSIAN.typeLanguage), LazyListState()
+            MutableStateFlow(TypeLanguage.PERSIAN.typeLanguage),
+            LazyListState(),
+            FakeIMyDialogFactory()
         )
     )
+}
+
+class FakeIMyDialogFactory : IMyDialogFactory {
+    override fun createDialog(myDialogConfig: MyDialogConfig): IMyDialogComponent {
+        TODO("Not yet implemented")
+    }
+
 }
