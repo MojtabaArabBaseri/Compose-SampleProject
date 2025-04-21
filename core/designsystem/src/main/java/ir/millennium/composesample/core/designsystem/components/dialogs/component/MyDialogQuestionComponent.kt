@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import ir.millennium.composesample.core.designsystem.R
 import ir.millennium.composesample.core.designsystem.components.dialogs.config.MyDialogConfig
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.White
@@ -54,7 +55,7 @@ class MyDialogQuestionComponent @Inject constructor() {
                             val (imageTitleRef, titleTextRef, messageRef, yesButtonRef, noButtonRef) = createRefs()
 
                             Image(
-                                painter = painterResource(id = R.drawable.ic_alert),
+                                painter = painterResource(id = MyIcons.AlertIcon),
                                 contentDescription = null,
                                 modifier = Modifier
                                     .constrainAs(imageTitleRef) {

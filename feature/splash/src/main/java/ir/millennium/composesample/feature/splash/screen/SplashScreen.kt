@@ -24,11 +24,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.firebase.authentication.AuthState
 import ir.millennium.composesample.core.model.TypeTheme
 import ir.millennium.composesample.core.utils.ui.MultiScreenPreview
 import ir.millennium.composesample.feature.splash.Constants
-import ir.millennium.composesample.feature.splash.R
 import ir.millennium.composesample.feature.splash.viewModel.FakeSplashScreenViewModel
 import ir.millennium.composesample.feature.splash.viewModel.ISplashScreenViewModel
 import kotlinx.coroutines.delay
@@ -50,8 +50,7 @@ fun SplashScreen(
     val scaleLogo by animateFloatAsState(
         targetValue = if (animatedState) 1f else 0f,
         animationSpec = tween(
-            durationMillis = 1000,
-            easing = { OvershootInterpolator(1.4f).getInterpolation(it) }),
+            durationMillis = 1000, easing = { OvershootInterpolator(1.4f).getInterpolation(it) }),
         label = "scale animation on logo"
     )
 
@@ -66,16 +65,21 @@ fun SplashScreen(
             .fillMaxSize()
             .navigationBarsPadding()
             .paint(
-                painterResource(id = if (stateTheme == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme else R.drawable.background_splash_light_theme),
-                contentScale = ContentScale.FillBounds
+                painterResource(
+                    id = if (stateTheme == TypeTheme.DARK.typeTheme)
+                        MyIcons.BackgroundAuthenticationDark
+                    else
+                        MyIcons.BackgroundAuthenticationLight
+                ),
+                contentScale = ContentScale.FillBounds,
             ), contentAlignment = Alignment.Center
     ) {
         Image(
             painter = painterResource(
                 id = if (stateTheme == TypeTheme.DARK.typeTheme) {
-                    R.drawable.ic_logo_complete_light
+                    MyIcons.LogoCompleteLight
                 } else {
-                    R.drawable.ic_logo_complete_dark
+                    MyIcons.LogoCompleteDark
                 }
             ),
             contentDescription = null,

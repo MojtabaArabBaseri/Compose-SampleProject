@@ -83,7 +83,7 @@ fun AboutMeScreen(
                 val (imageRef, textRef) = createRefs()
 
                 Image(
-                    painter = painterResource(id = R.drawable.image_user),
+                    painter = painterResource(USER_PROFILE_DATA.image),
                     contentDescription = null,
                     modifier = Modifier.constrainAs(imageRef) {
                         top.linkTo(parent.top)
@@ -96,7 +96,7 @@ fun AboutMeScreen(
                 )
 
                 Text(
-                    text = stringResource(id = R.string.full_name),
+                    text = stringResource(id = USER_PROFILE_DATA.fullName),
                     modifier = Modifier.constrainAs(textRef) {
                         top.linkTo(imageRef.bottom)
                         bottom.linkTo(imageRef.bottom)

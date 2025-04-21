@@ -1,7 +1,6 @@
 package ir.millennium.composesample.feature.detail_article.screen
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.background
@@ -36,7 +35,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -47,16 +45,15 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import coil.compose.AsyncImage
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.GrayDark
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.network.model.ArticleItem
 import ir.millennium.composesample.feature.detail_article.R
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
-
-    val context = LocalContext.current
 
     var visibleAnimationEnterScreen by rememberSaveable { mutableStateOf(false) }
 
@@ -92,7 +89,7 @@ fun DetailArticleScreen(articleItem: ArticleItem, onBackPressed: () -> Unit) {
                         onBackPressed()
                     }) {
                         Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_back_toolbar),
+                            imageVector = ImageVector.vectorResource(id = MyIcons.ArrowBack),
                             contentDescription = "Back Icon",
                             tint = LocalCustomColorsPalette.current.iconColorPrimary
                         )

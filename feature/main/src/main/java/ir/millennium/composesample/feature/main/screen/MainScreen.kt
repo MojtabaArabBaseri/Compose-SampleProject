@@ -45,6 +45,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import ir.millennium.composesample.core.designsystem.components.dialogs.config.MyDialogConfig
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.utils.CustomSnackBar
 import ir.millennium.composesample.core.model.BottomNavItemState
@@ -78,12 +79,12 @@ fun MainScreen(
     val bottomNavItemList = listOf(
         BottomNavItemState(
             stringResource(id = R.string.profile),
-            (ImageVector.vectorResource(id = R.drawable.ic_user_profile)),
-            (ImageVector.vectorResource(id = R.drawable.ic_user_profile))
+            (ImageVector.vectorResource(id = MyIcons.UserProfile)),
+            (ImageVector.vectorResource(id = MyIcons.UserProfile))
         ), BottomNavItemState(
             stringResource(id = R.string.articles),
-            (ImageVector.vectorResource(id = R.drawable.ic_articles)),
-            (ImageVector.vectorResource(id = R.drawable.ic_articles))
+            (ImageVector.vectorResource(id = MyIcons.Articles)),
+            (ImageVector.vectorResource(id = MyIcons.Articles))
         )
     )
 

@@ -38,6 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composeSample.feature.settings.R
 import ir.millennium.composesample.core.designsystem.components.NormalTopAppBar
 import ir.millennium.composesample.core.designsystem.components.SelectLanguageDropDown
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.GrayLight
 import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
@@ -61,13 +62,13 @@ fun SettingsScreen(viewModel: SettingsScreenViewModel, onBackPressed: () -> Unit
     val languageList = listOf(
         LanguageModel(
             title = stringResource(id = R.string.persian),
-            flag = ImageVector.vectorResource(id = R.drawable.iran_flag),
+            flag = ImageVector.vectorResource(id = MyIcons.IranFlag),
             typeLanguage = TypeLanguage.PERSIAN.typeLanguage,
             selected = stateLanguage.value == TypeLanguage.PERSIAN.typeLanguage
         ),
         LanguageModel(
             title = stringResource(id = R.string.english),
-            flag = ImageVector.vectorResource(id = R.drawable.canada_flag),
+            flag = ImageVector.vectorResource(id = MyIcons.CanadaFlag),
             typeLanguage = TypeLanguage.ENGLISH.typeLanguage,
             selected = stateLanguage.value == TypeLanguage.ENGLISH.typeLanguage
         )
@@ -82,7 +83,7 @@ fun SettingsScreen(viewModel: SettingsScreenViewModel, onBackPressed: () -> Unit
     ) {
         NormalTopAppBar(
             stringResource(id = R.string.settings),
-            ImageVector.vectorResource(R.drawable.ic_back_toolbar),
+            ImageVector.vectorResource(id = MyIcons.ArrowBack),
             onBackPressed,
             Modifier
                 .fillMaxWidth()
@@ -121,7 +122,7 @@ fun SettingsScreen(viewModel: SettingsScreenViewModel, onBackPressed: () -> Unit
                         .background(if (stateTheme.value == TypeTheme.LIGHT.typeTheme) Green else Color.Transparent),
                 ) {
                     Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_sun),
+                        imageVector = ImageVector.vectorResource(id = MyIcons.Sun),
                         contentDescription = "Light icon",
                         modifier = Modifier.size(24.dp),
                         tint = if (stateTheme.value == TypeTheme.LIGHT.typeTheme) White else NavyColor
@@ -137,7 +138,7 @@ fun SettingsScreen(viewModel: SettingsScreenViewModel, onBackPressed: () -> Unit
                         .background(if (stateTheme.value == TypeTheme.DARK.typeTheme) Green else Color.Transparent),
                 ) {
                     Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_moon),
+                        imageVector = ImageVector.vectorResource(id = MyIcons.Moon),
                         contentDescription = "Dark icon",
                         modifier = Modifier.size(24.dp),
                         tint = if (stateTheme.value == TypeTheme.DARK.typeTheme) White else NavyColor

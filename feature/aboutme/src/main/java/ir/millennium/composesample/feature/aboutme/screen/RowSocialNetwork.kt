@@ -2,7 +2,6 @@ package ir.millennium.composesample.feature.aboutme.screen
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +27,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.model.UserProfileSocialNetworkEntity
 import ir.millennium.composesample.feature.aboutme.R
@@ -70,7 +71,7 @@ fun RowSocialNetwork(item: UserProfileSocialNetworkEntity) {
                     .padding(end = 8.dp)
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_left_arrow),
+                    imageVector = ImageVector.vectorResource(id = MyIcons.ArrowLeft),
                     contentDescription = "",
                     tint = LocalCustomColorsPalette.current.textColorPrimary,
                     modifier = Modifier.size(ButtonDefaults.IconSize)
@@ -83,7 +84,7 @@ fun RowSocialNetwork(item: UserProfileSocialNetworkEntity) {
 
 fun navToSocialNetwork(context: Context, item: UserProfileSocialNetworkEntity) {
     ContextCompat.startActivity(
-        context, Intent(Intent.ACTION_VIEW, Uri.parse(context.resources.getString(item.link))),
+        context, Intent(Intent.ACTION_VIEW, context.resources.getString(item.link).toUri()),
         null
     )
 }

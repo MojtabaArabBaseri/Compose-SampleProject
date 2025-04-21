@@ -55,6 +55,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
@@ -108,8 +109,8 @@ fun LoginScreen(
                 .navigationBarsPadding()
                 .paint(
                     painterResource(
-                        id = if (stateTheme == TypeTheme.DARK.typeTheme) R.drawable.background_splash_dark_theme
-                        else R.drawable.background_login_light_theme
+                        id = if (stateTheme == TypeTheme.DARK.typeTheme) MyIcons.BackgroundAuthenticationDark
+                        else MyIcons.BackgroundAuthenticationLight
                     ),
                     contentScale = ContentScale.FillBounds
                 )
