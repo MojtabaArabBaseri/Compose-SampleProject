@@ -1,24 +1,25 @@
 package ir.millennium.composesample.feature.aboutme
 
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.model.UserProfileEntity
 import ir.millennium.composesample.core.model.UserProfileSocialNetworkEntity
 
 object Constants {
 
     val USER_PROFILE_DATA = UserProfileEntity(
-        image = R.drawable.image_user,
+        image = MyIcons.ImageUser,
         fullName = R.string.full_name,
         socialNetwork = ArrayList<UserProfileSocialNetworkEntity>().apply {
             add(
                 UserProfileSocialNetworkEntity(
-                    title = R.string.github,
-                    link = R.string.link_github
+                    title = R.string.website,
+                    link = R.string.link_website
                 )
             )
             add(
                 UserProfileSocialNetworkEntity(
-                    title = R.string.gitlab,
-                    link = R.string.link_gitlab
+                    title = R.string.github,
+                    link = R.string.link_github
                 )
             )
             add(

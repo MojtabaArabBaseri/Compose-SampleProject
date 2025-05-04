@@ -3,6 +3,6 @@
 
     <dimen name="size_radius_button">8dp</dimen>
     <dimen name="size_height_button">56dp</dimen>
-
+    <dimen name="min_height_toolbar">64dp</dimen>
 
 </resources>

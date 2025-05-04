@@ -12,7 +12,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -25,7 +25,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -39,19 +38,24 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import ir.millennium.composesample.core.designsystem.components.dialogs.config.MyDialogConfig
+import androidx.compose.ui.unit.dp
+import ir.millennium.composesample.core.designsystem.components.MySnackbar
+import ir.millennium.composesample.core.designsystem.components.MySnackbarHost
+import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
-import ir.millennium.composesample.core.designsystem.utils.CustomSnackBar
 import ir.millennium.composesample.core.model.BottomNavItemState
 import ir.millennium.composesample.feature.main.Constants.BACK_PRESSED
 import ir.millennium.composesample.feature.main.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -78,12 +82,12 @@ fun MainScreen(
     val bottomNavItemList = listOf(
         BottomNavItemState(
             stringResource(id = R.string.profile),
-            (ImageVector.vectorResource(id = R.drawable.ic_user_profile)),
-            (ImageVector.vectorResource(id = R.drawable.ic_user_profile))
+            (ImageVector.vectorResource(id = MyIcons.UserProfile)),
+            (ImageVector.vectorResource(id = MyIcons.UserProfile))
         ), BottomNavItemState(
             stringResource(id = R.string.articles),
-            (ImageVector.vectorResource(id = R.drawable.ic_articles)),
-            (ImageVector.vectorResource(id = R.drawable.ic_articles))
+            (ImageVector.vectorResource(id = MyIcons.Articles)),
+            (ImageVector.vectorResource(id = MyIcons.Articles))
         )
     )
 
@@ -152,31 +156,30 @@ fun MainScreen(
                     )
                 )
 
-                SnackbarHost(
-                    hostState = snackbarHostState,
+                MySnackbarHost(
+                    snackbarHostState = snackbarHostState,
                     modifier = Modifier
-                        .fillMaxWidth()
                         .align(Alignment.TopCenter)
-                ) { snackbarData ->
-                    CustomSnackBar(snackbarData, snackbarStatus)
-                }
+                        .padding(0.dp),
+                    snackbar = {
+                        snackbarHostState.currentSnackbarData?.let { data ->
+                            MySnackbar(
+                                data = data,
+                                modifier = Modifier.height(dimensionResource(R.dimen.min_height_toolbar)),
+                                shape = RectangleShape
+                            )
+                        }
+                    }
+                )
             }
         }
 
     }
 
     if (isShowExitAppDialog.value) {
-        val dialogConfig = MyDialogConfig.MyDialogQuestionConfig(
-            title = stringResource(id = R.string.attention),
-            message = stringResource(id = R.string.message_exit_app),
-            labelYesButton = stringResource(id = R.string.yes),
-            labelNoButton = stringResource(id = R.string.no),
-            stateDialog = isShowExitAppDialog,
-            onClickYes = {
-                viewModel.signOut()
-                navToSplashScreen()
-            })
-        viewModel.myDialogFactory.createDialog(dialogConfig).Render()
+        viewModel.ShowDialogForExitApp(
+            navToSplashScreen = navToSplashScreen, isShowExitAppDialog = isShowExitAppDialog
+        )
     }
 
     BackHandler {

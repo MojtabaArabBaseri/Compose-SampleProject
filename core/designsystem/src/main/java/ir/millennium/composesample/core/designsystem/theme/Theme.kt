@@ -67,7 +67,7 @@ fun AppTheme(
         rememberSystemUiController().setSystemBarsColor(color = Black)
         rememberSystemUiController().setNavigationBarColor(color = Black)
     } else {
-        rememberSystemUiController().setSystemBarsColor(StatusbarLightColor)
+        rememberSystemUiController().setSystemBarsColor(StatusBarLightColor)
         rememberSystemUiController().setNavigationBarColor(color = NavigationBottomLightColor)
     }
 
