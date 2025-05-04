@@ -12,14 +12,14 @@ object Constants {
         socialNetwork = ArrayList<UserProfileSocialNetworkEntity>().apply {
             add(
                 UserProfileSocialNetworkEntity(
-                    title = R.string.github,
-                    link = R.string.link_github
+                    title = R.string.website,
+                    link = R.string.link_website
                 )
             )
             add(
                 UserProfileSocialNetworkEntity(
-                    title = R.string.gitlab,
-                    link = R.string.link_gitlab
+                    title = R.string.github,
+                    link = R.string.link_github
                 )
             )
             add(

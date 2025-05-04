@@ -3,6 +3,7 @@
 
     <string name="link_github">https://github.com/mojtabaarabbaseri</string>
     <string name="link_gitlab">https://gitlab.com/mojtabaarabbaseri</string>
+    <string name="link_website">https://hezarehteam.ir/</string>
     <string name="link_linkedin">https://www.linkedin.com/in/mojtaba-arabbaseri-003343b0</string>
     <string name="link_telegram">https://t.me/MojtabaArabBaseri</string>
     <string name="link_instagram">https://instagram.com/mojtaba.arab.baseri?igshid=ZGUzMzM3NWJiOQ==</string>
@@ -11,6 +12,7 @@
     <string name="full_name">مجتبی عرب باصری</string>
     <string name="github">گیت هاب</string>
     <string name="gitlab">گیت لب</string>
+    <string name="website">وب سایت</string>
     <string name="linkedin">لینکدین</string>
     <string name="telegram">تلگرام</string>
     <string name="whatsapp">واتساپ</string>

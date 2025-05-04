@@ -10,9 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -21,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -29,6 +28,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import ir.millennium.composesample.core.designsystem.components.MyLoadingWheel
 import ir.millennium.composesample.core.network.model.ArticleItem
 import ir.millennium.composesample.feature.articles.R
 import kotlinx.coroutines.CoroutineScope
@@ -96,12 +96,11 @@ fun ArticleScreen(
                                     .height(70.dp)
                                     .padding(16.dp)
                             ) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier
-                                        .size(20.dp)
-                                        .align(Alignment.Center),
-                                    color = MaterialTheme.colorScheme.primary,
-                                    strokeWidth = 6.dp
+                                MyLoadingWheel(
+                                    contentDesc = "Loading More Data",
+                                    modifier = Modifier.align(Alignment.Center),
+                                    baseLineColor = MaterialTheme.colorScheme.onBackground,
+                                    progressLineColor = Color.Green
                                 )
                             }
                         }

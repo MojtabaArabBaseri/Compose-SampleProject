@@ -4,15 +4,10 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -28,7 +23,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -40,11 +34,11 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import ir.millennium.composesample.core.designsystem.components.MyStandardButton
 import ir.millennium.composesample.core.designsystem.components.dialogs.component.IMyDialogComponent
 import ir.millennium.composesample.core.designsystem.components.dialogs.config.MyDialogConfig
 import ir.millennium.composesample.core.designsystem.components.dialogs.factory.IMyDialogFactory
 import ir.millennium.composesample.core.designsystem.theme.AppFont
-import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
 import ir.millennium.composesample.core.designsystem.theme.NavyColor
 import ir.millennium.composesample.core.designsystem.theme.White
@@ -126,22 +120,19 @@ fun AboutMeScreen(
         }
 
         item {
-            Button(
+            MyStandardButton(
                 onClick = { isSheetOpen = true },
                 modifier = Modifier
-                    .padding(top = 12.dp, bottom = 20.dp, start = 16.dp, end = 16.dp)
-                    .fillMaxWidth()
-                    .height(dimensionResource(id = R.dimen.size_height_button)),
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.size_radius_button)),
-                colors = ButtonDefaults.buttonColors(containerColor = Green)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.aboutMe),
-                    color = White,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
+                    .padding(top = 12.dp, bottom = 20.dp, start = 16.dp, end = 16.dp),
+                text = {
+                    Text(
+                        text = stringResource(id = R.string.aboutMe),
+                        color = White,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+            )
         }
     }
 

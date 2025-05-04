@@ -11,7 +11,7 @@
     <dimen name="max_height_editText">66dp</dimen>
     <dimen name="min_height_editText">48dp</dimen>
     <dimen name="min_height_textView">33dp</dimen>
-    <dimen name="min_height_button_view">60dp</dimen>
+    <dimen name="min_height_button">48dp</dimen>
     <dimen name="min_width_button_view">56dp</dimen>
     <dimen name="size_margin_editText_from_side">90dp</dimen>
     <dimen name="min_height_toolbar">64dp</dimen>
@@ -21,17 +21,17 @@
     <dimen name="size_radius_button">8dp</dimen>
     <dimen name="size_radius_card_view">10dp</dimen>
     <dimen name="size_radius_editText">10dp</dimen>
-    <dimen name="size_rediues_dialog_Fragment">20dp</dimen>
+    <dimen name="size_radius_dialog_Fragment">20dp</dimen>
     <dimen name="size_stroke_width_button">1.5dp</dimen>
 
     <dimen name="space_logo_from_top">180dp</dimen>
     <dimen name="space_box_username_from_logo">57dp</dimen>
-    <dimen name="space_btn_regiter_from_lbl_mobile">243dp</dimen>
+    <dimen name="space_btn_register_from_lbl_mobile">243dp</dimen>
 
     <dimen name="space_logo_from_top_register_code">88dp</dimen>
     <dimen name="space_lbl_wrong_number_from_lbl_timer">78dp</dimen>
-    <dimen name="space_btn_regiter_code_from_lbl_wrong_number">115dp</dimen>
+    <dimen name="space_btn_register_code_from_lbl_wrong_number">115dp</dimen>
 
-    <dimen name="space_btn_regiter_from_lbl_family_sign_up">187dp</dimen>
+    <dimen name="space_btn_register_from_lbl_family_sign_up">187dp</dimen>
 
 </resources>

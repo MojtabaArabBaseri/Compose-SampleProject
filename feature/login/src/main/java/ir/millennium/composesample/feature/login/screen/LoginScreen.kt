@@ -23,11 +23,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -55,6 +50,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ir.millennium.composesample.core.designsystem.components.MyLoadingWheel
+import ir.millennium.composesample.core.designsystem.components.MyRoundedButton
+import ir.millennium.composesample.core.designsystem.components.MySnackbarHost
 import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.Green
 import ir.millennium.composesample.core.designsystem.theme.LocalCustomColorsPalette
@@ -82,8 +80,7 @@ fun LoginScreen(
 
     val stateTheme by viewModel.typeTheme.collectAsStateWithLifecycle()
     val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartIntentSenderForResult(),
-        onResult = { result ->
+        contract = ActivityResultContracts.StartIntentSenderForResult(), onResult = { result ->
             isLoadingVisible = false
             if (result.resultCode == RESULT_OK) {
                 coroutineScope.launch {
@@ -111,8 +108,7 @@ fun LoginScreen(
                     painterResource(
                         id = if (stateTheme == TypeTheme.DARK.typeTheme) MyIcons.BackgroundAuthenticationDark
                         else MyIcons.BackgroundAuthenticationLight
-                    ),
-                    contentScale = ContentScale.FillBounds
+                    ), contentScale = ContentScale.FillBounds
                 )
         ) {
             Column(
@@ -163,9 +159,9 @@ fun LoginScreen(
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_btn_regiter_from_lbl_family_sign_up)))
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.space_btn_register_from_lbl_family_sign_up)))
 
-                Button(
+                MyRoundedButton(
                     onClick = {
                         isLoadingVisible = true
                         coroutineScope.launch {
@@ -178,17 +174,10 @@ fun LoginScreen(
                         }
                     },
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(dimensionResource(id = R.dimen.size_height_button))
                         .padding(start = 55.dp, end = 55.dp)
                         .shadow(elevationButton, RoundedCornerShape(28.dp))
                         .animateEnterExit(enter = fadeIn(tween(1000, 1500))),
                     enabled = enableButton.value,
-                    shape = RoundedCornerShape(28.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Green,
-                        disabledContainerColor = Green
-                    )
                 ) {
                     Crossfade(
                         modifier = Modifier.fillMaxSize(),
@@ -200,12 +189,14 @@ fun LoginScreen(
                             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                         ) {
                             if (isLoadingVisible) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(30.dp),
-                                    strokeWidth = 4.dp,
-                                    color = NavyColor,
-                                    strokeCap = StrokeCap.Round
+
+                                MyLoadingWheel(
+                                    contentDesc = "Login Loading",
+                                    modifier = Modifier.size(66.dp),
+                                    baseLineColor = NavyColor,
+                                    progressLineColor = Green
                                 )
+
                             } else {
                                 Text(
                                     text = stringResource(id = R.string.login),
@@ -231,9 +222,11 @@ fun LoginScreen(
                 textAlign = TextAlign.Right
             )
 
-            SnackbarHost(
-                hostState = snackbarHostState,
-                modifier = Modifier.align(Alignment.BottomCenter)
+            MySnackbarHost(
+                snackbarHostState = snackbarHostState,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp)
             )
         }
     }
@@ -249,10 +242,8 @@ fun LoginScreen(
             is AuthState.Authenticated -> navToMainScreen()
 
             is AuthState.Error -> {
-                authState.exception?.localizedMessage?.let {
-                    snackbarHostState.showSnackbar(
-                        it
-                    )
+                authState.exception?.localizedMessage?.let { message ->
+                    snackbarHostState.showSnackbar(message)
                 }
             }
 

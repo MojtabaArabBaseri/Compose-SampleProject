@@ -36,7 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ir.millennium.composeSample.feature.settings.R
-import ir.millennium.composesample.core.designsystem.components.NormalTopAppBar
+import ir.millennium.composesample.core.designsystem.components.MyTopAppBar
 import ir.millennium.composesample.core.designsystem.components.SelectLanguageDropDown
 import ir.millennium.composesample.core.designsystem.icons.MyIcons
 import ir.millennium.composesample.core.designsystem.theme.GrayLight
@@ -81,7 +81,7 @@ fun SettingsScreen(viewModel: SettingsScreenViewModel, onBackPressed: () -> Unit
             .verticalScroll(scrollSate)
             .background(MaterialTheme.colorScheme.background)
     ) {
-        NormalTopAppBar(
+        MyTopAppBar(
             stringResource(id = R.string.settings),
             ImageVector.vectorResource(id = MyIcons.ArrowBack),
             onBackPressed,
